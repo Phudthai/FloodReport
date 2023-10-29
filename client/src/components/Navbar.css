@@ -1,0 +1,71 @@
+.custom-button1 {
+    width: 120px;
+    height: 40px;
+    background: #687EFF;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    border: 1px solid white;
+    transition: background 0.3s;
+}
+
+.custom-button2 {
+    width: 180px;
+    height: 40px;
+    background: white;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    color: #687EFF;
+    border: 1px solid #687EFF;
+    transition: background 0.3s;
+}
+
+.custom-button1:hover {
+    background: white;
+    color: #687EFF;
+    border: 1px solid #687EFF;
+}
+
+.custom-button2:hover {
+    background: #687EFF;
+    color: white;
+    border: 1px solid #687EFF;
+}
+
+.Logo {
+    overflow: hidden;
+    height: 40px;
+    width: 120px;
+    object-fit: cover;
+    align-items: center;
+    justify-items: center;
+    display: flex;
+}
+
+.logo-image {
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.nav-buttons {
+    position: absolute;
+    right: 0;
+    display: flex;
+}
+
+.custom-button1 {
+    margin-right: 10px;
+}
+
+.custom-button2 {
+    margin-right: 10px;
+}
+
+.navbar-divider {
+    height: 1px;
+    background: #80B3FF;
+    width: 100%;
+    margin: 10px 0;
+}
