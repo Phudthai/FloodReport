@@ -40,7 +40,7 @@ export default function Footer() {
                     <label>นโยบายความเป็นส่วนตัว</label>
                 </nav>
             </nav>
-        </nav>
+          </nav>
         <nav className="footer-container-3">
             <label>Copyright © 2023 Flood Report</label>
         </nav>

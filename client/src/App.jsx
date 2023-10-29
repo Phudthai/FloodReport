@@ -5,9 +5,7 @@ import AdminNavbar from "./components/AdminNavbar";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import Main from "./Pages/MainSc";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "./pages/MainSc";
 import Footer from "./components/Footer";
 
 function App() {
@@ -19,16 +17,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<Main />} />
-        </Route>
+          
+          </Route>
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
     <Footer />
-      <BrowserRouter>
-				<Routes>
-					<Route path="signin" element={<SignIn />} />
-					<Route path="signup" element={<SignUp />} />
-				</Routes>
-			</BrowserRouter>
     </>
   );
 }

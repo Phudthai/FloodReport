@@ -1,14 +1,15 @@
 import React from "react";
 import "./SignUp.css";
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import LogoImg from '../images/logo-icon-bt-blue.png'
+import MainSc from "./MainSc";
 
 export default function SignUp() {
 	const [show, setShow] = useState(true);
 	return (
 		<>
+		<MainSc/>
 		<Modal
         className="container-modal-signup"
         size="md"
