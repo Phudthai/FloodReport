@@ -53,6 +53,7 @@
     position: absolute;
     right: 0;
     display: flex;
+    margin: 5px;
 }
 
 .custom-button1 {
