@@ -1,6 +1,5 @@
 import React from "react";
 import './SignIn.css';
-import cwg1 from '../images/cwg.png';
 export default function SignIn() {
 	return (
 		<div className="container signin-container ">
@@ -34,7 +33,7 @@ export default function SignIn() {
                         <div className="continueWgoogle">
                             <div className="google-container-btn">
                             <button type="submit" className="btn btn-block google-btn">
-                                    <img src={cwg1} class="cwg-image" alt=""/>
+                                    <img src={""} class="cwg-image" alt=""/>
                                     <p class="google-text nunito-600">เข้าสู่ระบบด้วย Google</p>
                                 </button> 
                             </div>
