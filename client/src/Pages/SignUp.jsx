@@ -1,17 +1,30 @@
 import React from "react";
 import "./SignUp.css";
-import cwg1 from "../images/cwg.png";
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import LogoImg from '../images/logo-icon-bt-blue.png'
 
 export default function SignUp() {
+	const [show, setShow] = useState(true);
 	return (
-		<div className="container signup-container ">
-			<div class="card mb-3 card-center position-absolute top-50 start-50 translate-middle shadow p-3 mb-5 bg-body rounded ">
-				<div class="card-body body-signup-card">
-					<div>
-						<div class="btngroup">
+		<>
+		<Modal
+        className="container-modal-signup"
+        size="md"
+        show={show}
+        onHide={() => setShow(false)}
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Body className="container-modal-body">
+          <div className="container-body">
+            <div class="card-body body-signup-card">
+							<div>
+								<img src={LogoImg} className="LogoImg-image" alt=""/>
+						<div class="btngroup btngroup-signup">
 							<button class="btn btn-sm signup-btn-activate">สมัครสมาชิก</button>
 							<a href="/signin">
-								<button class="btn btn-sm signin-tab-btn">เข้าสู่ระบบ</button>
+								<button class="btn btn-sm signin-tab-btn-unactivate">เข้าสู่ระบบ</button>
 							</a>
 						</div>
 						<div className="mb-3">
@@ -67,20 +80,12 @@ export default function SignUp() {
 						<button type="submit" className="btn btn-block signup-btn">
 							สมัครสมาชิก
 						</button>
-
-						<div className="ortext">หรือ</div>
-
-						<div className="continueWgoogle">
-							<div className="google-container-btn">
-								<button type="submit" className="btn btn-block google-btn">
-									<img src={cwg1} class="cwg-image" alt="" />
-									<p class="google-text">สมัครสมาชิกด้วย Google</p>
-								</button>
-							</div>
-						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+          </div>
+            
+        </Modal.Body>
+		</Modal>
+		</>
 	);
 }
