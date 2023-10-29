@@ -70,3 +70,19 @@
     width: 100%;
     margin: 10px 0;
 }
+
+.googleAPI {
+    height: 550px;
+    position: relative;
+    width: fill;
+    display: flex;
+}
+
+.menusc {
+    position: absolute;
+    height: 150px;
+    width: 250px;
+    border: 1px solid #687EFF;
+    margin-top: -80px;
+    right: 100px;
+  }
