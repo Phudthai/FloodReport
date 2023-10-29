@@ -5,9 +5,11 @@ import status from "../images/floodingstatus.png";
 export default function MainSc() {
   return (
     <div className="main-container">
+      <div className="maps-menu">
       <img src={googlemap} className="googleAPI" />
       <img src={status} className="menusc" />
-      <h1 class="center-text">ตรวจสอบพื้นที่ของคุณ</h1>
+        </div>
+      <h1 class="head-center-text" id="check">ตรวจสอบพื้นที่ของคุณ</h1>
       <div class="container">
         <p class="custom-style center-text">แขวง / เขต:</p>
         <label for="menu"></label>
