@@ -1,5 +1,5 @@
 import React from "react";
-import "./Navbar.css";
+import "./MainSc.css";
 import googlemap from "../images/googlemap.jpg";
 import status from "../images/floodingstatus.png";
 export default function MainSc() {
