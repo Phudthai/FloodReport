@@ -4,7 +4,7 @@ import googlemap from "../images/googlemap.jpg";
 import status from "../images/floodingstatus.png";
 export default function MainSc() {
   return (
-    <div>
+    <div className="main-container">
       <img src={googlemap} className="googleAPI" />
       <img src={status} className="menusc" />
       <h1 class="center-text">ตรวจสอบพื้นที่ของคุณ</h1>
