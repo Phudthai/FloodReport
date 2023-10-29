@@ -2,7 +2,7 @@ import React from "react";
 import "./Navbar.css";
 import logoImg from "../images/logo-icon-s-blue.png";
 
-export default function Navbar() {
+export default function AdminNavbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="nav-buttons">
