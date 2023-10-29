@@ -1,0 +1,139 @@
+body{
+    background-color: #F2F3F4;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-container{
+    display: flex;
+    justify-content: center;
+    
+}
+.card-center{
+    display: flex;
+
+}
+
+.btngroup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 2rem;
+    padding: 4px;
+    margin-bottom: 2rem;
+    background-color: #F2F3F4;
+    border-radius: 4px
+}
+
+.border-form-signup{
+    border-radius: 0;
+    border: 1px solid #212529; 
+}
+
+#signup_Email::placeholder{
+    color: #ADB5BD;
+}
+
+#signup_Password::placeholder{
+    color: #ADB5BD;
+}
+
+#signup_ConfirmPassword::placeholder{
+    color: #ADB5BD;
+}
+
+.signup-tab-btn{
+    background-color: #F2F3F4;
+    border-radius: 8px;
+    padding: 4px 3rem 4px 3rem;
+    font-weight: 600;
+    color: #6C757D;
+}
+
+.signup-tab-btn:hover{
+    background-color: #FFF;
+}
+
+.signup-btn-activate{
+    background-color: #FFF;
+    border-radius: 8px;
+    padding: 4px 3rem 4px 3rem;
+    font-weight: 600;
+}
+
+.signup-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    background: #212529;
+    color: #FFFFFF;
+}
+
+.signup-btn:hover{
+    border: 1px solid #212529;
+    background: none;
+    color: #212529;
+}
+
+.body-signup-card{
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 1rem 2rem 1rem;
+}
+
+.signup-checkbox{
+    background: #212529;
+    margin: 6px;
+}
+
+.font-checkbox{
+    font-size: small;
+    margin: 6px;
+}
+
+.form-check{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ortext{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ADB5BD;
+    margin: 1rem 0;
+}
+
+.google-container-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.google-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #FFF;
+    border-color: #ADB5BD;
+}
+
+.cwg-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    margin-right: 1rem;
+}
+
+.google-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
