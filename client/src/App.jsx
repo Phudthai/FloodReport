@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/MainSc";
 import Footer from "./components/Footer";
+import FormPost from "./pages/FormPost";
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
           </Route>
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="formpost" element={<FormPost />} />
       </Routes>
     </BrowserRouter>
     <Footer />

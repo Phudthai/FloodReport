@@ -1,0 +1,91 @@
+.main-container-formpost {
+    display: flex;
+    width: 100%;
+    height: 1000px;
+}
+
+.config-container-formpost {
+    margin: auto;
+}
+
+.form-row1 {
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+.form-row1-location {
+    margin-right: 2rem;
+    display: flex;
+}
+
+.form-row1-location-text {
+    margin-right:1rem;
+}
+
+
+.large-text-feild {
+    background-color: white;
+    border: 1px solid rgb(186, 186, 186);
+    border-radius: 5px;
+    width: 330px;
+    height: 100px;
+    float: left;
+}
+
+.google-map-image-row1 {
+    width: 220px;
+    height: 220px;
+}
+
+.form-row2-description {
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+.form-row2-description-text {
+    margin-right: 1rem;
+}
+
+.form-row3-picture {
+    display: flex;
+    margin-bottom: 4rem;
+}
+.form-row3-picture-text {
+    margin-right: 1rem;
+}
+.google-map-image-row3 {
+    width: 180px;
+    height: 280px;
+    margin-right: 1rem;
+}
+
+.form-row4-button {
+    display: flex;
+    justify-content: center;
+}
+
+.form-row4-button-1{
+    margin: 0 5rem;
+}
+
+.form-row4-button-2 {
+    margin: 0 5rem;
+}
+
+.button-back {
+    height:35px;
+    border-radius: 6px;
+    width: 250px;
+    color: #687EFF;
+    background-color: #fff;
+    border: 1px solid #687EFF;
+}
+
+.button-submit {
+    height: 35px;
+    border-radius: 6px;
+    width: 250px;
+    background-color: #687EFF;
+    border: 2px #687EFF;
+    color: #FFFFFF
+}
