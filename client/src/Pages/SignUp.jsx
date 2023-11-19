@@ -6,8 +6,17 @@ import LogoImg from '../images/logo-icon-bt-blue.png'
 import MainSc from "./MainSc";
 
 export default function SignUp() {
-	const [show, setShow] = useState(true);
-	return (
+  const [show, setShow] = useState(true);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [confirmpassword, setConfirmpassword] = useState();
+  const [password, setPassword] = useState();
+  const [pic, setPic] = useState();
+
+  const handleclick = () =>{
+    
+  }
+  return (
     <>
       <MainSc />
       <Modal
@@ -91,11 +100,9 @@ export default function SignUp() {
                     <a href=" ">เงื่อนไขและข้อตกลงการให้บริการ</a> แล้ว
                   </p>
                 </div>
-                <a href="/signin">
-                  <button type="submit" className="btn btn-block signup-btn">
-                    สมัครสมาชิก
-                  </button>
-                </a>
+                <button onClick={handleclick} className="btn btn-block signup-btn">
+                  สมัครสมาชิก
+                </button>
               </div>
             </div>
           </div>
