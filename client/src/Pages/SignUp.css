@@ -1,10 +1,14 @@
-body{
+body {
     background-color: #F2F3F4;
     display: flex;
     flex-direction: column;
 }
 
-.btngroup-signup{
+.container-body-signup {
+    display: flex;
+}
+
+.btngroup-signup {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,24 +19,24 @@ body{
     border-radius: 4px
 }
 
-.border-form-signup{
+.border-form-signup {
     border-radius: 0;
-    border: 1px solid #687EFF; 
+    border: 1px solid #687EFF;
 }
 
-#signup_Email::placeholder{
+#signup_Email::placeholder {
     color: #ADB5BD;
 }
 
-#signup_Password::placeholder{
+#signup_Password::placeholder {
     color: #ADB5BD;
 }
 
-#signup_ConfirmPassword::placeholder{
+#signup_ConfirmPassword::placeholder {
     color: #ADB5BD;
 }
 
-.signin-tab-btn-unactivate{
+.signin-tab-btn-unactivate {
     background-color: #B5D2FF;
     border-radius: 8px;
     padding: 4px 3rem 4px 3rem;
@@ -40,11 +44,11 @@ body{
     color: #687EFF;
 }
 
-.signin-tab-btn-unactivate:hover{
+.signin-tab-btn-unactivate:hover {
     background-color: #FFF;
 }
 
-.signup-btn-activate{
+.signup-btn-activate {
     background-color: #687EFF;
     border-radius: 8px;
     padding: 4px 3rem 4px 3rem;
@@ -52,7 +56,7 @@ body{
     color: #FFF;
 }
 
-.signup-btn{
+.signup-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,41 +66,48 @@ body{
     color: #FFFFFF;
 }
 
-.signup-btn:hover{
+.signup-btn:hover {
     border: 1px solid #212529;
     background: none;
     color: #212529;
 }
 
-.body-signup-card{
+.container-body-signup-config {
     display: flex;
-    flex-direction: row;
-    padding: 2rem 1rem 2rem 2.5rem;
+    padding: 1rem 1rem 2rem 2.5rem;
+    margin: auto;
+    justify-content: center;
+    border-radius: 2rem;
 }
 
-.signup-checkbox{
+.body-signup-card{
+    background-color: #FFF;
+    padding: 2rem;
+}
+
+.signup-checkbox {
     background: #212529;
     margin: 6px;
 }
 
-.font-checkbox{
+.font-checkbox {
     font-size: small;
     margin: 6px;
 }
 
-.form-check{
+.form-check {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .container-modal-body {
-  display:flex;
-  margin:0 0 0 1rem;
-  
+    display: flex;
+    margin: 0 0 0 1rem;
+
 }
 
 .container-modal-signup {
-  display: flex;
-  margin: 3% 0 0 0;
+    display: flex;
+    margin: 3% 0 0 0;
 }

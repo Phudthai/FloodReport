@@ -4,6 +4,10 @@ body{
     flex-direction: column;
 
 }
+.container-body-signin {
+    display: flex;
+}
+
 .signin-container{
     display: flex;
     justify-content: center;
@@ -79,10 +83,12 @@ body{
     color: #212529;
 }
 
-.body-signin-card{
+.container-body-signin-config {
     display: flex;
-    flex-direction: row;
     padding: 2rem 1rem 2rem 2.5rem;
+    margin: auto;
+    justify-content: center;
+    border-radius: 2rem;
 }
 
 .signin-font-label{

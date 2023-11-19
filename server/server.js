@@ -1,23 +1,25 @@
+require("./config/db");
 const express = require("express");
-const {chats} = require("./data/data");
-const dotenv = require("dotenv");
+const { chats } = require("./data/data");
+const UserRouter = require("./routes/UserRoute");
 
 const app = express()
 
-app.get('/', (req,res) =>{
-    res.send("Api is Running Successfully!")
-});
+const bodyParser = require("express").json;
+app.use(bodyParser());
 
-app.get("/api/chat", (req,res) => {
+app.get("/api/chat", (req, res) => {
     res.send(chats)
 });
 
-app.get('/api/chat/:id', (req,res) =>{
+app.get('/api/chat/:id', (req, res) => {
     // console.log(req.params.id);
-    const singleChat = chats.find(c=>c._id === req.params.id);
+    const singleChat = chats.find(c => c._id === req.params.id);
     res.send(singleChat);
 })
 
-const PORT = process.env.PORT || 5000;
+app.use("/api", UserRouter);
 
-app.listen(PORT,console.log(`Server started on PORT ${PORT}`));
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
+});
