@@ -2,9 +2,12 @@ import React from "react";
 import "./MainSc.css";
 import googlemap from "../images/googlemap.jpg";
 import status from "../images/floodingstatus.png";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 export default function MainSc() {
   return (
     <div className="main-container">
+      <Navbar />
       <div className="maps-menu">
       <img src={googlemap} className="googleAPI" />
       <img src={status} className="menusc" />
@@ -128,6 +131,7 @@ export default function MainSc() {
           </tbody>
         </table>
       </div>
+      <Footer/>
     </div>
   );
 }

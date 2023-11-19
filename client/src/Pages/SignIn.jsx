@@ -1,35 +1,60 @@
 import React from "react";
 import './SignIn.css';
 import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
 import LogoImg from '../images/logo-icon-bt-blue.png'
-import MainSc from "./MainSc";
-export default function SignIn() {
-    const [show, setShow] = useState(true);
-	return (
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+const SignIn = () => {
+  const navigate = useNavigate()
+  
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const handleclick = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      await Swal.fire(
+        'แจ้งเตือน',
+        'กรุณากรอกข้อมูลให้ครบ',
+        'error'
+      )
+      return
+    } else {
+
+      await axios.post("/api/signin", { email, password }).then(async (res) => {
+        await Swal.fire(
+          'แจ้งเตือน',
+          'เข้าสู่ระบบสำเร็จ',
+          'success'
+        )
+        navigate('/')
+      }).catch((err) => {
+        Swal.fire(
+          'แจ้งเตือน',
+          err.response.data.error,
+          'error'
+        )
+      })
+    }
+  }
+  return (
     <>
-      <MainSc />
-      <Modal
-        className="container-modal-signin"
-        size="md"
-        show={show}
-        onHide={() => setShow(false)}
-        aria-labelledby="example-custom-modal-styling-title"
-      >
-        <Modal.Body className="container-modal-body">
-          <div class="card-body body-signin-card">
-            <div>
-              <img src={LogoImg} className="LogoImg-image" alt="" />
-              <div class="btngroup btngroup-signin">
-                <a href="/signup">
-                  <button class="btn btn-sm signup-tab-btn-unactivate">
-                    สมัครสมาชิก
-                  </button>
-                </a>
-                <button class="btn btn-sm signin-btn-activate">
-                  เข้าสู่ระบบ
+      <div class="container-body-signin">
+        <div class="container-body-signin-config">
+          <div className="body-signup-card">
+            <img src={LogoImg} className="LogoImg-image" alt="" />
+            <div class="btngroup btngroup-signin">
+              <a href="/signup">
+                <button class="btn btn-sm signup-tab-btn-unactivate">
+                  สมัครสมาชิก
                 </button>
-              </div>
+              </a>
+              <button class="btn btn-sm signin-btn-activate">
+                เข้าสู่ระบบ
+              </button>
+            </div>
+            <form className="signin-form" onSubmit={handleclick}>
               <div className="mb-3">
                 <label
                   for="exampleInputEmail1"
@@ -43,6 +68,7 @@ export default function SignIn() {
                   id="signin_Email"
                   aria-describedby="emailHelp"
                   placeholder="Email@example.com"
+                  onChange={(e) => setEmail(e.target.value)}
                 ></input>
               </div>
 
@@ -58,17 +84,17 @@ export default function SignIn() {
                   className="form-control border-form-signin border-top-0 border-end-0 border-start-0 nunito-600 nunito-placeholder"
                   id="signin_Password"
                   placeholder="รหัสผ่าน"
+                  onChange={(e) => setPassword(e.target.value)}
                 ></input>
               </div>
-              <a href="/formpost">
-                <button type="submit" className="btn btn-block signin-btn">
-                  เข้าสู่ระบบ
-                </button>
-              </a>
-            </div>
+              <button onClick={handleclick} className="btn btn-block signin-btn">
+                เข้าสู่ระบบ
+              </button>
+            </form>
           </div>
-        </Modal.Body>
-      </Modal>
+        </div>
+      </div>
     </>
   );
 }
+export default SignIn;
