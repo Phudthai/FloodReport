@@ -6,7 +6,7 @@ export default function ChatPage() {
     const [chats, setChats] = useState([]);
 
     const fetchChats = async() => {
-        const {data} = await axios.get('/api/chat');
+        const {data} = await axios.get("/api/chat");
 
         setChats(data);
     };
@@ -16,7 +16,9 @@ export default function ChatPage() {
 
     return(
         <div className="main-container-chatpage">
-            {chats.map()}
+            <div className="config-container-chatpage">
+            {chats.map(chat=>(<div className="text-chatpage" key={chat._id}>{chat.chatName}</div>))}
+            </div>   
         </div>
     );
 }
