@@ -40,11 +40,9 @@ exports.signup = (req, res) => {
           const saltRounds = 10;
           bcrypt.hash(password, saltRounds).then((hashedPassword) => {
             const newUser = new User({
-              _id,
               email,
               password: hashedPassword,
-              slug,
-              token: generateToken(_id)
+              slug
             });
             newUser
               .save()

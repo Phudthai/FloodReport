@@ -4,6 +4,7 @@ import googlemap from "../images/googlemap.jpg";
 import status from "../images/floodingstatus.png";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
 export default function MainSc() {
   return (
     <div className="main-container">
