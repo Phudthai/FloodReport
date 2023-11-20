@@ -1,43 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import './SignIn.css';
-import { useState } from 'react';
 import LogoImg from '../images/logo-icon-bt-blue.png'
 import Swal from "sweetalert2";
 import axios from "axios";
+import { authenticate } from "../service/autherize";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const navigate = useNavigate()
-  
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const handleclick = async (e) => {
-    e.preventDefault();
-    if (!email || !password) {
-      await Swal.fire(
-        'แจ้งเตือน',
-        'กรุณากรอกข้อมูลให้ครบ',
-        'error'
-      )
-      return
-    } else {
 
-      await axios.post("/api/signin", { email, password }).then(async (res) => {
-        await Swal.fire(
-          'แจ้งเตือน',
-          'เข้าสู่ระบบสำเร็จ',
-          'success'
-        )
-        navigate('/')
-      }).catch((err) => {
+  const [state, setState] = useState({
+    email: "",
+    password: ""
+  });
+
+  const { email, password } = state
+  const inputValue = name => event => {
+    setState({ ...state, [name]: event.target.value });
+  }
+  const submitForm = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_API}/signin`, { email, password })
+      .then(response => {
+        //login สำเร็จ
+        authenticate(response, () => navigate("/"))
+      }).catch(err => {
         Swal.fire(
           'แจ้งเตือน',
           err.response.data.error,
           'error'
         )
       })
-    }
   }
+  // const handleclick = async (e) => {
+  //   e.preventDefault();
+  //   if (!email || !password) {
+  //     await Swal.fire(
+  //       'แจ้งเตือน',
+  //       'กรุณากรอกข้อมูลให้ครบ',
+  //       'error'
+  //     )
+  //     return
+  //   } else {
+
+  //     await axios.post("/api/signin", { email, password }).then(async (res) => {
+  //       await Swal.fire(
+  //         'แจ้งเตือน',
+  //         'เข้าสู่ระบบสำเร็จ',
+  //         'success',
+  //       )
+  //       navigate('/')
+  //     }).catch((err) => {
+  //       Swal.fire(
+  //         'แจ้งเตือน',
+  //         err.response.data.error,
+  //         'error'
+  //       )
+  //     })
+  //   }
+  // }
+
   return (
     <>
       <div class="container-body-signin">
@@ -54,7 +77,7 @@ const SignIn = () => {
                 เข้าสู่ระบบ
               </button>
             </div>
-            <form className="signin-form" onSubmit={handleclick}>
+            <form className="signin-form" onSubmit={submitForm}>
               <div className="mb-3">
                 <label
                   for="exampleInputEmail1"
@@ -65,10 +88,8 @@ const SignIn = () => {
                 <input
                   type="email"
                   className="form-control border-form-signin border-top-0 border-end-0 border-start-0 nunito-600 nunito-placeholder"
-                  id="signin_Email"
-                  aria-describedby="emailHelp"
                   placeholder="Email@example.com"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={inputValue("email")}
                 ></input>
               </div>
 
@@ -79,15 +100,13 @@ const SignIn = () => {
                 >
                   รหัสผ่าน
                 </label>
-                <input
-                  type="password"
+                <input type="password"
                   className="form-control border-form-signin border-top-0 border-end-0 border-start-0 nunito-600 nunito-placeholder"
-                  id="signin_Password"
                   placeholder="รหัสผ่าน"
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={inputValue("password")}
                 ></input>
               </div>
-              <button onClick={handleclick} className="btn btn-block signin-btn">
+              <button type="submit" className="btn btn-block signin-btn">
                 เข้าสู่ระบบ
               </button>
             </form>

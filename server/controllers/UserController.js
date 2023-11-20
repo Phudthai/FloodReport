@@ -5,6 +5,8 @@ const User = require("../models/User");
 //Password handLer
 const bcrypt = require("bcrypt");
 
+const generateToken = require("../config/generateToken");
+
 // Signup
 exports.signup = (req, res) => {
   let { email, password, confirmpassword } = req.body;
@@ -38,11 +40,12 @@ exports.signup = (req, res) => {
           const saltRounds = 10;
           bcrypt.hash(password, saltRounds).then((hashedPassword) => {
             const newUser = new User({
+              _id,
               email,
               password: hashedPassword,
               slug,
+              token: generateToken(_id)
             });
-
             newUser
               .save()
               .then((result) => {

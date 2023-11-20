@@ -7,12 +7,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./Pages/MainSc";
 import FormPost from "./Pages/FormPost";
 import ChatPage from "./Pages/ChatPage";
-
 function App() {
   
   return (
-    <>
-      
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}/>
@@ -22,7 +19,6 @@ function App() {
         <Route path="formpost" element={<FormPost />} />
       </Routes>
     </BrowserRouter>
-    </>
   );
 }
 
