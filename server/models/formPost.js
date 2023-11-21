@@ -2,19 +2,20 @@ const mongoose = require("mongoose");
 
 const formPostSchema = mongoose.Schema(
     {
-        email: {
+        district: {
             type: String,
         },
-        password: {
+        area: {
             type: String,
         },
-        slug: {
+        information: {
             type: String,
         },
-        role: {
-            type: String,
-            default: "user",
-        },
+        expireAt: {
+            type: Date,
+            default: Date.now,
+            index: { expires: '3h' }
+        }
     },
     { timestamps: true }
 );

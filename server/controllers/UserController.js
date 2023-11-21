@@ -27,18 +27,18 @@ exports.signup = async (req, res) => {
     return res.status(400).json({ error: "ยืนยันรหัสผ่านไม่ถูกต้อง" })
   }
   await User.create({
-      email: email,
-      password: password,
-      slug: slug
+    email: email,
+    password: password,
+    slug: slug,
+  })
+    .then((user) => {
+      console.log(user)
+      res.json({ token: generateToken(user._id), email: user.email })
     })
-      .then((user) => {
-        console.log(user)
-        res.json({ token: generateToken(user._id), email: user.email })
-      })
-      .catch((err) => {
-        res.status(400).json({ error: err })
-      })
-  }
+    .catch((err) => {
+      res.status(400).json({ error: err })
+    })
+}
 
 // Signin
 exports.signin = async (req, res) => {
@@ -65,6 +65,6 @@ exports.signin = async (req, res) => {
   }
 }
 
-exports.currentEmail = async (req,res) => {
+exports.currentEmail = async (req, res) => {
 
 }
