@@ -11,6 +11,12 @@ const formPostSchema = mongoose.Schema(
         information: {
             type: String,
         },
+        slug: {
+            type: String,
+        },
+        image: {
+            type: String,
+        },
         expireAt: {
             type: Date,
             default: Date.now,
@@ -19,4 +25,4 @@ const formPostSchema = mongoose.Schema(
     },
     { timestamps: true }
 );
-module.exports = mongoose.model("formposts", formPostSchemaSchema)
+module.exports = mongoose.model("formposts", formPostSchema)

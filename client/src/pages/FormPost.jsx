@@ -2,34 +2,46 @@ import React, { useEffect, useState } from "react";
 import "./FormPost.css";
 import Swal from "sweetalert2";
 import axios from "axios";
-import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
+import { useNavigate } from 'react-router-dom';
 
 export default function FormPost() {
+  const navigate = useNavigate()
+
   const [state, setState] = useState({
     district: "",
     area: "",
     information: "",
-    image:""
   });
 
+  const [image, setImage] = useState(null);
+  const [pic, setPic] = useState()
+  const [uploaded, setUploaded] = useState(false);
   const { district, area, information } = state
 
   const inputValue = (name) => (event) => {
     setState({ ...state, [name]: event.target.value });
   };
-  
-  const [pic,setPic] = useState()
-  const [loading, setLoading] = useState(false)
-  const submitForm = async (req, res) => {
-    const loadUser = localStorage.getItem("token")
 
-  }
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
 
-  const postDetails = (pics) => {
-    setLoading(true);
+  const submitForm = async (e) => {
+    e.preventDefault();
+    
 
-    if (pics === undefined) {
+    if (district === "" || area === "" || information === "") {
+      await Swal.fire(
+        'แจ้งเตือน',
+        'กรุณากรอกข้อมูลให้ครบถ้วน',
+        'error'
+      )
+      return
+    }
+
+    if (image === null) {
       Swal.fire(
         'แจ้งเตือน',
         'โปรดเลือกรูปภาพ',
@@ -38,52 +50,58 @@ export default function FormPost() {
       return;
     }
 
-    if (pics.type !== "image/jpeg" && pics.type !== "image/png") {
+    if (image.type !== "image/jpeg" && image.type !== "image/png") {
       Swal.fire(
         'แจ้งเตือน',
         'โปรดเลือกรูปภาพไฟล์ Jpeg หรือ Png',
         'error'
       )
-      setLoading(false);
       return;
     }
 
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
-
+    if (image.type === "image/jpeg" || image.type === "image/png") {
       const data = new FormData()
-      data.append("file", pics)
+      data.append("file", image)
       data.append("upload_preset", "floodreport")
       data.append("cloud_name", "dlw7n48ff")
-      axios.post("https://api.cloudinary.com/v1_1/dlw7n48ff/image/upload", data)
-        .then((response) => {
-          console.log("Cloudinary response:", response);
-          setPic(response.data.url.toString());
-          setLoading(false);
-          Swal.fire(
-            'แจ้งเตือน',
-            'อัพโหลดรูปภาพสำเร็จ',
-            'success'
-          )
-        })
-        .catch((error) => {
-          console.log("Cloudinary error:", error);
-          setLoading(false);
-        });
+      try {
+        const response = await axios
+        .post("https://api.cloudinary.com/v1_1/dlw7n48ff/image/upload", data)
+        setPic(response.data.url.toString());
+        setUploaded(true)
+
+      } catch (error) {
+        Swal.fire('แจ้งเตือน', error.message, 'error');
+      }
     }
   }
-
-  const handleDataFromChild = (data) => {
-    setImage(data)
-  }
-
   useEffect(() => {
+    const loadUser = localStorage.getItem("token")
 
-  }, []);
+    if(uploaded){
+      axios
+        .post(`${process.env.REACT_APP_API}/formpost`, { loadUser, district, area, information, pic })
+        .then(async (res) => {
+          await Swal.fire(
+            'แจ้งเตือน',
+            res.data.message,
+            'success'
+          )
+          navigate('/')
+        }).catch(async (err) => {
+          await Swal.fire(
+            'แจ้งเตือน',
+            err.response.data.error,
+            'error'
+          )
+        })
+    }
+  },[uploaded])
+
   return (
-    
+
     <div className="main-container-formpost">
       <Navbar />
-      {loading && <Loading />}
       <form className="config-container-formpost" onSubmit={submitForm}>
         <div className="form-row1">
           <div className="form-row1-infomation">
@@ -108,7 +126,7 @@ export default function FormPost() {
             <p>แนบรูปภาพสถานที่:</p>
           </div>
           <div className="form-row3-picture-image">
-            <input type="file" p={1.5} accept="image/*" onChange={(e) => postDetails(e.target.files[0])}></input>
+            <input type="file" p={1.5} accept="image/*" onChange={handleImage}></input>
           </div>
         </div>
         <div className="form-row4-button">
@@ -118,7 +136,7 @@ export default function FormPost() {
             </a>
           </div>
           <div className="form-row4-button-2">
-              <button type="submit" className="button-submit">ยืนยันการโพส</button>
+            <button type="submit" className="button-submit">ยืนยันการโพส</button>
           </div>
         </div>
       </form>
