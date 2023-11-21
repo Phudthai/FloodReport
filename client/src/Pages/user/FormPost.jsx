@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./FormPost.css";
 import Swal from "sweetalert2";
 import axios from "axios";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/user/Navbar";
 import { useNavigate } from 'react-router-dom';
 
 export default function FormPost() {
@@ -28,9 +28,9 @@ export default function FormPost() {
     setImage(file);
   };
 
-  const submitForm = async (e) => {
+  const submitButton = async (e) => {
     e.preventDefault();
-    
+
 
     if (district === "" || area === "" || information === "") {
       await Swal.fire(
@@ -66,7 +66,7 @@ export default function FormPost() {
       data.append("cloud_name", "dlw7n48ff")
       try {
         const response = await axios
-        .post("https://api.cloudinary.com/v1_1/dlw7n48ff/image/upload", data)
+          .post("https://api.cloudinary.com/v1_1/dlw7n48ff/image/upload", data)
         setPic(response.data.url.toString());
         setUploaded(true)
 
@@ -78,7 +78,7 @@ export default function FormPost() {
   useEffect(() => {
     const loadUser = localStorage.getItem("token")
 
-    if(uploaded){
+    if (uploaded) {
       axios
         .post(`${process.env.REACT_APP_API}/formpost`, { loadUser, district, area, information, pic })
         .then(async (res) => {
@@ -96,13 +96,13 @@ export default function FormPost() {
           )
         })
     }
-  },[uploaded])
+  }, [uploaded])
 
   return (
 
     <div className="main-container-formpost">
       <Navbar />
-      <form className="config-container-formpost" onSubmit={submitForm}>
+      <div className="config-container-formpost">
         <div className="form-row1">
           <div className="form-row1-infomation">
             <p>แขวง:</p>
@@ -136,10 +136,10 @@ export default function FormPost() {
             </a>
           </div>
           <div className="form-row4-button-2">
-            <button type="submit" className="button-submit">ยืนยันการโพส</button>
+            <button onClick={submitButton} className="button-submit">ยืนยันการโพส</button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

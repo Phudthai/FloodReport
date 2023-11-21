@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import logoImg from "../images/logo-icon-s-blue.png";
+import logoImg from "../../images/logo-icon-s-blue.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 export default function Navbar() {
@@ -12,6 +12,13 @@ export default function Navbar() {
     } else {
       navigate("/signup")
     }
+  }
+
+  const logout = async (req, res) => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("email")
+    navigate('/')
+    window.location.reload(true)
   }
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
@@ -32,7 +39,9 @@ export default function Navbar() {
 
       <div className="nav-buttons">
         <div className="nav-email">
-          สวัสดี,{user}
+          <a type="button" onClick={logout}>
+            สวัสดี,{user}
+          </a>
         </div>
         <button onClick={handleClick} className="btn custom-button1">แจ้งน้ำท่วม</button>
         <a className="btn custom-button2" href="#check">

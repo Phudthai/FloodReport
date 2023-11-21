@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './SignIn.css';
-import LogoImg from '../images/logo-icon-bt-blue.png'
+import LogoImg from '../../images/logo-icon-bt-blue.png'
 import Swal from "sweetalert2";
 import axios from "axios";
-import { authenticate } from "../service/autherize";
+import { authenticate } from "../../service/autherize";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -15,17 +15,24 @@ const SignIn = () => {
   });
 
   const { email, password } = state
+  
+  const lowercaseemail = email.toLowerCase();
   const inputValue = name => event => {
     setState({ ...state, [name]: event.target.value });
   }
-  const submitForm = async(e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
+    
     await axios
-      .post(`${process.env.REACT_APP_API}/signin`, { email, password })
-      .then(async(response) => {
+      .post(`${process.env.REACT_APP_API}/signin`, { lowercaseemail, password })
+      .then(async (res) => {
         //login สำเร็จ
         await Swal.fire('แจ้งเตือน', 'เข้าสู่ระบบสำเร็จ', 'success')
-        authenticate(response, () => navigate("/"))
+        if (res.data.role === "admin") {
+          authenticate(res, () => navigate('/mainadmin'))
+        } else {
+          authenticate(res, () => navigate('/'))
+        }
       }).catch(err => {
         Swal.fire(
           'แจ้งเตือน',

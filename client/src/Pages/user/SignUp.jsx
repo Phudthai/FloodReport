@@ -1,11 +1,11 @@
 import React from "react";
 import "./SignUp.css";
 import { useState } from 'react';
-import LogoImg from '../images/logo-icon-bt-blue.png'
+import LogoImg from '../../images/logo-icon-bt-blue.png'
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { authenticate } from "../service/autherize";
+import { authenticate } from "../../service/autherize";
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -15,6 +15,9 @@ const SignUp = () => {
     confirmpassword: ""
   });
   const { email, password, confirmpassword } = state
+
+  const lowercaseemail = email.toLowerCase();
+
   const inputValue = name => event => {
     setState({ ...state, [name]: event.target.value });
   }
@@ -22,7 +25,7 @@ const SignUp = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    if (!email || !password || !confirmpassword) {
+    if (!lowercaseemail || !password || !confirmpassword) {
       await Swal.fire(
         'แจ้งเตือน',
         'กรุณากรอกข้อมูลให้ครบ',
@@ -32,7 +35,7 @@ const SignUp = () => {
     } else {
 
       await axios
-        .post(`${process.env.REACT_APP_API}/signup`, { email, password, confirmpassword })
+        .post(`${process.env.REACT_APP_API}/signup`, { lowercaseemail, password, confirmpassword })
         .then(async (res) => {
           await Swal.fire(
             'แจ้งเตือน',

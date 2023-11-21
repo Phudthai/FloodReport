@@ -1,17 +1,17 @@
 import "./MainSc.css";
-import googlemap from "../images/googlemap.jpg";
-import status from "../images/floodingstatus.png";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import googlemap from "../../images/googlemap.jpg";
+import status from "../../images/floodingstatus.png";
+import Navbar from "../../components/user/Navbar";
+import Footer from "../../components/user/Footer";
 
 export default function MainSc() {
   return (
     <div className="main-container">
       <Navbar />
       <div className="maps-menu">
-      <img src={googlemap} alt="" className="googleAPI" />
-      <img src={status} alt="" className="menusc" />
-        </div>
+        <img src={googlemap} alt="" className="googleAPI" />
+        <img src={status} alt="" className="menusc" />
+      </div>
       <h1 class="head-center-text" id="check">ตรวจสอบพื้นที่ของคุณ</h1>
       <div class="container">
         <p class="custom-style center-text">แขวง / เขต:</p>
@@ -44,7 +44,7 @@ export default function MainSc() {
             </tr>
           </thead>
           <tbody>
-          <tr>
+            <tr>
               <td>xoxoxox</td>
               <td>xoxoxox</td>
               <td>xoxoxox</td>
@@ -131,7 +131,7 @@ export default function MainSc() {
           </tbody>
         </table>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

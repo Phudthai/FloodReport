@@ -17,10 +17,14 @@ const formPostSchema = mongoose.Schema(
         image: {
             type: String,
         },
+        checked: {
+            type: String,
+            default: "pending"
+        },
         expireAt: {
             type: Date,
             default: Date.now,
-            index: { expires: '3h' }
+            index: { expires: '1d' }
         }
     },
     { timestamps: true }

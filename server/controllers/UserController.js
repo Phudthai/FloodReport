@@ -6,17 +6,17 @@ const generateToken = require("../config/generateToken");
 
 // Signup
 exports.signup = async (req, res) => {
-  const { email, password, confirmpassword } = req.body
+  const { lowercaseemail, password, confirmpassword } = req.body
 
   let slug = uuidv4()
 
-  const emailExist = await User.findOne({ email: email });
+  const emailExist = await User.findOne({ email: lowercaseemail });
   if (emailExist) {
     return res.status(400).json({ error: "อีเมลนี้ถูกใช้งานแล้ว" })
   }
 
   const emailForm = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-  if (!emailForm.test(email) && email !== "") {
+  if (!emailForm.test(lowercaseemail) && lowercaseemail !== "") {
     return res.status(400).json({ error: "รูปแบบของอีเมลไม่ถูกต้อง" })
   }
   if (password.length < 8) {
@@ -27,7 +27,7 @@ exports.signup = async (req, res) => {
     return res.status(400).json({ error: "ยืนยันรหัสผ่านไม่ถูกต้อง" })
   }
   await User.create({
-    email: email,
+    email: lowercaseemail,
     password: password,
     slug: slug,
   })
@@ -42,13 +42,13 @@ exports.signup = async (req, res) => {
 
 // Signin
 exports.signin = async (req, res) => {
-  const { email, password } = req.body
-
-  if (email == "" || password == "") {
+  const { lowercaseemail, password } = req.body
+  
+  if (lowercaseemail == "" || password == "") {
     return res.status(400).json({ error: "กรุณากรอกข้อมูลให้ครบ" })
   }
 
-  const user = await User.findOne({ email: email });
+  const user = await User.findOne({ email: lowercaseemail });
   if (user) {
     if (user && (await user.matchPassword(password))) {
       return (res.json)({
