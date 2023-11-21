@@ -5,15 +5,23 @@ import LogoImg from '../images/logo-icon-bt-blue.png'
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { authenticate } from "../service/autherize";
 
 const SignUp = () => {
   const navigate = useNavigate()
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+    confirmpassword: ""
+  });
+  const { email, password, confirmpassword } = state
+  const inputValue = name => event => {
+    setState({ ...state, [name]: event.target.value });
+  }
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmpassword, setConfirmpassword] = useState();
-  const handleclick = async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
+
     if (!email || !password || !confirmpassword) {
       await Swal.fire(
         'แจ้งเตือน',
@@ -23,20 +31,22 @@ const SignUp = () => {
       return
     } else {
 
-      await axios.post("/api/signup", { email, password, confirmpassword }).then(async (res) => {
-        await Swal.fire(
-          'แจ้งเตือน',
-          'สมัครสมาชิกสำเร็จ',
-          'success'
-        )
-        navigate('/')
-      }).catch((err) => {
-        Swal.fire(
-          'แจ้งเตือน',
-          err.response.data.error,
-          'error'
-        )
-      })
+      await axios
+        .post(`${process.env.REACT_APP_API}/signup`, { email, password, confirmpassword })
+        .then(async (res) => {
+          await Swal.fire(
+            'แจ้งเตือน',
+            'สมัครสมาชิกสำเร็จ',
+            'success'
+          )
+          authenticate(res, () => navigate('/'))
+        }).catch((err) => {
+          Swal.fire(
+            'แจ้งเตือน',
+            err.response.data.error,
+            'error'
+          )
+        })
     }
   }
   return (
@@ -56,7 +66,7 @@ const SignUp = () => {
               </a>
 
             </div>
-            <form className="signup-form" onSubmit={handleclick}>
+            <form className="signup-form" onSubmit={submitForm}>
               <div className="mb-3">
                 <label
                   for="exampleInputEmail1"
@@ -70,7 +80,7 @@ const SignUp = () => {
                   id="signup_Email"
                   aria-describedby="emailHelp"
                   placeholder="Email@example.com"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={inputValue("email")}
                 ></input>
               </div>
 
@@ -86,7 +96,7 @@ const SignUp = () => {
                   className="form-control border-form-signup border-top-0 border-end-0 border-start-0 nunito-placeholder nunito-600"
                   id="signup_Password"
                   placeholder="รหัสผ่าน"
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={inputValue("password")}
                 ></input>
               </div>
 
@@ -102,7 +112,7 @@ const SignUp = () => {
                   className="form-control border-form-signup border-top-0 border-end-0 border-start-0 nunito-placeholder nunito-600"
                   id="signup_ConfirmPassword"
                   placeholder="ยืนยันรหัสผ่าน"
-                  onChange={(e) => setConfirmpassword(e.target.value)}
+                  onChange={inputValue("confirmpassword")}
                 ></input>
               </div>
               <div className="mb-3 form-check">
@@ -119,7 +129,7 @@ const SignUp = () => {
                   <a href=" ">เงื่อนไขและข้อตกลงการให้บริการ</a> แล้ว
                 </p>
               </div>
-              <button onClick={handleclick} className="btn btn-block signup-btn">
+              <button type="submit" className="btn btn-block signup-btn">
                 สมัครสมาชิก
               </button>
             </form>

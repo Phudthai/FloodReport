@@ -13,7 +13,7 @@ export default function FormPost() {
               <p>เลือกพิกัดที่ต้องการ:</p>
             </div>
             <div className="form-row1-location-image">
-              <img src={googlemap} className="google-map-image-row1" />
+              <img src={googlemap} alt="" className="google-map-image-row1" />
             </div>
           </div>
           <div className="form-row1-infomation">
@@ -34,7 +34,7 @@ export default function FormPost() {
             <p>รูปภาพ:</p>
           </div>
           <div className="form-row3-picture-image">
-            <img src={floodingimage} className="google-map-image-row3" />
+            <img src={floodingimage} alt="" className="google-map-image-row3" />
           </div>
         </div>
         <div className="form-row4-button">

@@ -2,118 +2,69 @@ const { v4: uuidv4 } = require("uuid");
 //mongodb user modal
 const User = require("../models/User");
 
-//Password handLer
-const bcrypt = require("bcrypt");
-
 const generateToken = require("../config/generateToken");
 
 // Signup
-exports.signup = (req, res) => {
-  let { email, password, confirmpassword } = req.body;
+exports.signup = async (req, res) => {
+  const { email, password, confirmpassword } = req.body
 
-  slug = uuidv4();
-  console.log(email, password, confirmpassword, slug);
-  if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-    return res.status(400).json({
-      error: "รูปแบบของอีเมลล์ไม่ถูกต้อง",
-    });
-  } else if (password.length < 8) {
-    return res.status(400).json({
-      error: "พาสเวิร์ดควรมีความยาวขั้นต่ำ 8 ตัวอักษร",
-    });
-  } else if (password != confirmpassword) {
-    return res.status(400).json({
-      error: "ยืนยันพลาสเวิร์ดผิดพลาด",
-    });
-  } else {
-    //checking if user already exists
-    User.find({ email })
-      .then((result) => {
-        if (result.length) {
-          return res.status(400).json({
-            error: "อีเมลล์นี้ถูกใช้งานไปแล้ว",
-          });
-        } else {
-          //Try to create new user
+  let slug = uuidv4()
 
-          //password handLing
-          const saltRounds = 10;
-          bcrypt.hash(password, saltRounds).then((hashedPassword) => {
-            const newUser = new User({
-              email,
-              password: hashedPassword,
-              slug
-            });
-            newUser
-              .save()
-              .then((result) => {
-                res.json({
-                  status: "SUCCESS",
-                  message: "Signup successful",
-                  data: result,
-                });
-              })
-              .catch((err) => {
-                return res.status(400).json({
-                  error: "เกิดความผิดพลาด",
-                });
-              });
-          });
-        }
+  const emailExist = await User.findOne({ email: email });
+  if (emailExist) {
+    return res.status(400).json({ error: "อีเมลนี้ถูกใช้งานแล้ว" })
+  }
+
+  const emailForm = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+  if (!emailForm.test(email) && email !== "") {
+    return res.status(400).json({ error: "รูปแบบของอีเมลไม่ถูกต้อง" })
+  }
+  if (password.length < 8) {
+    return res.status(400).json({ error: "พาสเวิร์ดควรมีความยาวขั้นต่ำ 8 ตัวอักษร", });
+  }
+  if (password != confirmpassword) {
+    console.log(password, confirmpassword)
+    return res.status(400).json({ error: "ยืนยันรหัสผ่านไม่ถูกต้อง" })
+  }
+  await User.create({
+      email: email,
+      password: password,
+      slug: slug
+    })
+      .then((user) => {
+        console.log(user)
+        res.json({ token: generateToken(user._id), email: user.email })
       })
       .catch((err) => {
-        console.log(err);
-        return res.status(400).json({
-          error: "เกิดความผิดพลาด",
-        });
-      });
+        res.status(400).json({ error: err })
+      })
   }
-};
-
 
 // Signin
-exports.signin = (req, res) => {
-  let { email, password } = req.body;
+exports.signin = async (req, res) => {
+  const { email, password } = req.body
 
-  if (true) {
-    //check if user exist
-    User.find({ email })
-      .then((data) => {
-        if (data) {
-          //User exists
-
-          const hashedPassword = data[0].password;
-          bcrypt
-            .compare(password, hashedPassword)
-            .then((result) => {
-              if (result) {
-                //Password match
-                res.json({
-                  status: "SUCCESS",
-                  message: "Signin successful",
-                  data: data,
-                });
-              } else {
-                return res.status(400).json({
-                  error: "เกิดความผิดพลาด",
-                });
-              }
-            })
-            .catch((err) => {
-              return res.status(400).json({
-                error: "เกิดความผิดพลาด",
-              });
-            });
-        } else {
-          return res.status(400).json({
-            error: "เกิดความผิดพลาด",
-          });
-        }
-      })
-      .catch((err) => {
-        return res.status(400).json({
-          error: "เกิดความผิดพลาด",
-        });
-      });
+  if (email == "" || password == "") {
+    return res.status(400).json({ error: "กรุณากรอกข้อมูลให้ครบ" })
   }
-};
+
+  const user = await User.findOne({ email: email });
+  if (user) {
+    if (user && (await user.matchPassword(password))) {
+      return (res.json)({
+        _id: user._id,
+        email: user.email,
+        role: user.role,
+        token: generateToken(user._id)
+      })
+    } else {
+      return res.status(400).json({ error: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง" })
+    }
+  } else {
+    return res.status(400).json({ error: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง" })
+  }
+}
+
+exports.currentEmail = async (req,res) => {
+
+}

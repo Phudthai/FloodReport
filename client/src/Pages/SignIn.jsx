@@ -18,12 +18,13 @@ const SignIn = () => {
   const inputValue = name => event => {
     setState({ ...state, [name]: event.target.value });
   }
-  const submitForm = (e) => {
+  const submitForm = async(e) => {
     e.preventDefault();
-    axios
+    await axios
       .post(`${process.env.REACT_APP_API}/signin`, { email, password })
-      .then(response => {
+      .then(async(response) => {
         //login สำเร็จ
+        await Swal.fire('แจ้งเตือน', 'เข้าสู่ระบบสำเร็จ', 'success')
         authenticate(response, () => navigate("/"))
       }).catch(err => {
         Swal.fire(
@@ -33,33 +34,6 @@ const SignIn = () => {
         )
       })
   }
-  // const handleclick = async (e) => {
-  //   e.preventDefault();
-  //   if (!email || !password) {
-  //     await Swal.fire(
-  //       'แจ้งเตือน',
-  //       'กรุณากรอกข้อมูลให้ครบ',
-  //       'error'
-  //     )
-  //     return
-  //   } else {
-
-  //     await axios.post("/api/signin", { email, password }).then(async (res) => {
-  //       await Swal.fire(
-  //         'แจ้งเตือน',
-  //         'เข้าสู่ระบบสำเร็จ',
-  //         'success',
-  //       )
-  //       navigate('/')
-  //     }).catch((err) => {
-  //       Swal.fire(
-  //         'แจ้งเตือน',
-  //         err.response.data.error,
-  //         'error'
-  //       )
-  //     })
-  //   }
-  // }
 
   return (
     <>

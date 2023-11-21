@@ -1,4 +1,3 @@
-import React from "react";
 import "./MainSc.css";
 import googlemap from "../images/googlemap.jpg";
 import status from "../images/floodingstatus.png";
@@ -10,8 +9,8 @@ export default function MainSc() {
     <div className="main-container">
       <Navbar />
       <div className="maps-menu">
-      <img src={googlemap} className="googleAPI" />
-      <img src={status} className="menusc" />
+      <img src={googlemap} alt="" className="googleAPI" />
+      <img src={status} alt="" className="menusc" />
         </div>
       <h1 class="head-center-text" id="check">ตรวจสอบพื้นที่ของคุณ</h1>
       <div class="container">
