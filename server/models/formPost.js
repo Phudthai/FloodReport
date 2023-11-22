@@ -30,7 +30,7 @@ const formPostSchema = mongoose.Schema(
         expireAt: {
             type: Date,
             default: Date.now,
-            index: { expires: '1d' }
+            index: { expires: '10h' }
         }
     },
     { timestamps: true }

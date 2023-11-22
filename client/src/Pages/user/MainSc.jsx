@@ -7,13 +7,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function MainSc() {
   const [formposts, setFormposts] = useState([]);
 
   const navigate = useNavigate();
   const fetchData = async () => {
-    await axios.get(`${process.env.REACT_APP_API}/`)
+    await axios.get(`${process.env.REACT_APP_API}/post`)
       .then((response) => {
         setFormposts(response.data)
       })
@@ -53,9 +54,11 @@ export default function MainSc() {
                 <td>{formpost.area}</td>
                 <td>{formpost.information}</td>
                 <td>{formpost.status}</td>
-                <button onClick={() => navigate(`/post/${formpost.slug}`)} className="button-accept">info</button>
+                <td>
+                <Link to={`/post/${formpost.slug}`}>info
+                </Link>
+                </td>
               </tr>
-
             </tbody>
           ))
 

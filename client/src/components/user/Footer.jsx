@@ -19,7 +19,7 @@ export default function Footer() {
         </nav>
         <nav className="footer-container-2">
             <nav className="footer-logo">
-                <img src={logoImg} className="foot-logo-image"/>
+                <img src={logoImg} alt="" className="foot-logo-image"/>
             </nav>
             <nav className="footer-contact">
                 <nav className="footer-contact-head">
