@@ -1,60 +1,108 @@
-import "../user/MainSc.css";
-import googlemap from "../../images/googlemap.jpg";
-import status from "../../images/floodingstatus.png";
-import Navbar from "../../components/user/Navbar";
-import Footer from "../../components/user/Footer";
+import "./MainScAdmin.css";
+import AdminNavbar from "../../components/admin/AdminNavbar";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Table from 'react-bootstrap/Table';
 
-export default function MainSc() {
+
+export default function MainSc(props) {
+
+    const [formposts, setFormposts] = useState([]);
+    const fetchData = async () => {
+        await axios.get(`${process.env.REACT_APP_API}/admin`)
+            .then((response) => {
+                setFormposts(response.data)
+            })
+            .catch((err) => {
+                alert(err.message);
+            })
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+    const updateComfirmed = (slug) => {
+        axios.patch(`${process.env.REACT_APP_API}/admin/${slug}`)
+            .then((response) => {
+                Swal.fire('แจ้งเตือน', response.data.message, "success")
+                fetchData();
+            }).catch(err => alert(err));
+    }
+
+    const changeIsConfirmed = (slug) => {
+        Swal.fire({
+            title: 'ต้องการยืนยันโพสต์?',
+            icon: 'warning',
+            showCancelButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                updateComfirmed(slug)
+            }
+        })
+    }
+
+    const deleteRequire = (slug) => {
+        axios.delete(`${process.env.REACT_APP_API}/admin/${slug}`)
+            .then((response) => {
+                Swal.fire('แจ้งเตือน', response.data.message, "success")
+                fetchData();
+            }).catch(err => alert(err));
+    }
+
+    const confirmDelete = (slug) => {
+        Swal.fire({
+            title: 'ยืนยันเพื่อลบบัญชีผู้ใช้งาน',
+            icon: 'warning',
+            showCancelButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteRequire(slug)
+            }
+        })
+    }
+    
     return (
-        <div className="main-container">
-            <Navbar />
-            <div className="maps-menu">
-                <img src={googlemap} alt="" className="googleAPI" />
-                <img src={status} alt="" className="menusc" />
+        <div className="main-container-admin">
+            <AdminNavbar />
+            <div className="sub-main-container-admin">
+            
+            <Table striped="columns">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>District</th>
+                        <th>Area</th>
+                        <th>Information</th>
+                        <th>Status</th>
+                        <th>Button</th>
+                    </tr>
+                </thead>
+                {formposts.length > 0 ? (
+                    formposts.map((formpost, index) => (
+                        <tbody>
+                            <tr className="table-row-body" key={index}>
+                                <td>{index+1}</td>
+                                <td>{formpost.district}</td>
+                                <td>{formpost.area}</td>
+                                <td>{formpost.information}</td>
+                                <td>{formpost.status}</td>
+                                <button onClick={() => changeIsConfirmed(formpost.slug)} className="button-accept">accept</button>
+                                <button onClick={() => confirmDelete(formpost.slug)} className="button-delete">delete</button>
+                            </tr>
+                            
+                        </tbody>
+                    ))
+                    
+                ) : (
+                    <p>No data available</p>
+                )}
+                
+            </Table>
             </div>
-            <h1 class="head-center-text" id="check">Admin Page</h1>
-            <div class="container">
-                <p class="custom-style center-text">แขวง / เขต:</p>
-                <label for="menu"></label>
-                <select id="menu" class="custom-dropdown custom-style">
-                    <option value="option1">กรุณาเลือก</option>
-                    <option value="option2">ตัวเลือก 2</option>
-                    <option value="option3">ตัวเลือก 3</option>
-                    <option value="option4">ตัวเลือก 4</option>
-                </select>
-                <p class="custom-style center-text">ตำบล / อำเภอ:</p>
-                <label for="menu"></label>
-                <select id="menu" class="custom-dropdown custom-style">
-                    <option value="option1">กรุณาเลือก</option>
-                    <option value="option2">ตัวเลือก 2</option>
-                    <option value="option3">ตัวเลือก 3</option>
-                    <option value="option4">ตัวเลือก 4</option>
-                </select>
-            </div>
-
-            <div class="table-container">
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th>สถานะน้ำท่วม</th>
-                            <th>เขต</th>
-                            <th>แขวง</th>
-                            <th>วันที่</th>
-                            <th>เวลา</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>xoxoxox</td>
-                            <td>xoxoxox</td>
-                            <td>xoxoxox</td>
-                            <td>xoxoxox</td>
-                            <td>xoxoxox</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <Footer />
-        </div>
+            
+        </div >
+        
     );
 }

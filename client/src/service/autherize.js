@@ -3,7 +3,7 @@ export const authenticate = (response, next) => {
     if (window !== "undefined") {
         //เก็บข้อมูลลง local storage
         localStorage.setItem("token", JSON.stringify(response.data.token))
-        localStorage.setItem("token", JSON.stringify(response.data.email))
+        localStorage.setItem("email", JSON.stringify(response.data.email))
     }
     next()
 }

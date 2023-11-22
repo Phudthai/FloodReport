@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import './SignIn.css';
 import LogoImg from '../../images/logo-icon-bt-blue.png'
 import Swal from "sweetalert2";
@@ -29,7 +29,7 @@ const SignIn = () => {
         //login สำเร็จ
         await Swal.fire('แจ้งเตือน', 'เข้าสู่ระบบสำเร็จ', 'success')
         if (res.data.role === "admin") {
-          authenticate(res, () => navigate('/mainadmin'))
+          authenticate(res, () => navigate('/admin'))
         } else {
           authenticate(res, () => navigate('/'))
         }

@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const formPostSchema = mongoose.Schema(
     {
+        email: {
+            type: String,
+        },
         district: {
             type: String,
         },
@@ -17,9 +20,12 @@ const formPostSchema = mongoose.Schema(
         image: {
             type: String,
         },
-        checked: {
+        status: {
             type: String,
-            default: "pending"
+        },
+        isConfirmed: {
+            type: Boolean,
+            default: false
         },
         expireAt: {
             type: Date,

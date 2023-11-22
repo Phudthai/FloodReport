@@ -21,8 +21,8 @@ export default function Navbar() {
     window.location.reload(true)
   }
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
-      setUser(localStorage.getItem("token"))
+    if (localStorage.getItem("email") !== null) {
+      setUser(localStorage.getItem("email").replace(/"/g, ''))
     }
     else {
       setUser("Guest")

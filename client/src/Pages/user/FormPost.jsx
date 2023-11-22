@@ -12,12 +12,13 @@ export default function FormPost() {
     district: "",
     area: "",
     information: "",
+    status: "",
   });
 
   const [image, setImage] = useState(null);
   const [pic, setPic] = useState()
   const [uploaded, setUploaded] = useState(false);
-  const { district, area, information } = state
+  const { district, area, information, status } = state
 
   const inputValue = (name) => (event) => {
     setState({ ...state, [name]: event.target.value });
@@ -32,7 +33,7 @@ export default function FormPost() {
     e.preventDefault();
 
 
-    if (district === "" || area === "" || information === "") {
+    if (district === "" || area === "" || information === "" || status === "") {
       await Swal.fire(
         'แจ้งเตือน',
         'กรุณากรอกข้อมูลให้ครบถ้วน',
@@ -76,11 +77,11 @@ export default function FormPost() {
     }
   }
   useEffect(() => {
-    const loadUser = localStorage.getItem("token")
+    const loadUser = localStorage.getItem("email").replace(/"/g, '')
 
     if (uploaded) {
       axios
-        .post(`${process.env.REACT_APP_API}/formpost`, { loadUser, district, area, information, pic })
+        .post(`${process.env.REACT_APP_API}/formpost`, { loadUser, district, area, information, pic, status })
         .then(async (res) => {
           await Swal.fire(
             'แจ้งเตือน',
@@ -104,11 +105,19 @@ export default function FormPost() {
       <Navbar />
       <div className="config-container-formpost">
         <div className="form-row1">
-          <div className="form-row1-infomation">
+          <div className="form-row1-status">
+            <label htmlFor="myDropdown">เลือกสถานะน้ำท่วม: </label>
+            <select id="myDropdown" onChange={inputValue("status")}>
+              <option value=""></option>
+              <option value="น้ำท่วมขังเล็กน้อย">น้ำท่วมขังเล็กน้อย</option>
+              <option value="น้ำท่วมขังมาก">น้ำท่วมขังมาก</option>
+            </select>
+          </div>
+          <div className="form-row1-district">
             <p>แขวง:</p>
             <input onChange={inputValue("district")} cols="40" rows="5" />
           </div>
-          <div className="form-row1-infomation">
+          <div className="form-row1-area">
             <p>เขต:</p>
             <input onChange={inputValue("area")} cols="40" rows="5" />
           </div>

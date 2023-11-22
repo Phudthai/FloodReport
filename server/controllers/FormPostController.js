@@ -3,7 +3,7 @@ const formposts = require("../models/FormPost")
 const { v4: uuidv4 } = require('uuid');
 
 exports.sendRequest = async (req, res) => {
-    const { loadUser, district, area, information, pic } = req.body
+    const { loadUser, district, area, information, pic, status } = req.body
     console.log(pic)
     let slug = uuidv4()
     if (loadUser) {
@@ -13,7 +13,8 @@ exports.sendRequest = async (req, res) => {
             area: area,
             information: information,
             image: pic,
-            slug: slug
+            slug: slug,
+            status: status,
         }).then(() => {
             res.status(200).json({ message: "ส่งการรายงานสำเร็จ" })
         }).catch((err) => {
