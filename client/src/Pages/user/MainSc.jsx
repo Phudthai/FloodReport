@@ -71,13 +71,13 @@ export default function MainSc() {
               <div>{formpost.district}</div>
             </Col>
             <Col className="table-data">
-            <div>{formpost.information}</div>
+            <div>{formpost.information.substring(0,10)+'...'}</div>
             </Col>
             <Col className="table-data">
-            <div>xx/xx/xx</div>
+            <div>{new Date(formpost.createdAt).toLocaleDateString()}</div>
             </Col>
             <Col className="table-data">
-            <div>xx:xx</div>
+            <div>{new Date(formpost.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
             </Col>
             <Col className="table-data">
             <Link to={`/post/${formpost.slug}`}>info
@@ -166,7 +166,7 @@ export default function MainSc() {
           </Table>
         </div>
       </div> */}
-      {/* <Footer /> */}
+       <Footer /> 
     </div>
   );
 }

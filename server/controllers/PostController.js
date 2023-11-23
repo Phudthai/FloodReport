@@ -10,7 +10,7 @@ exports.getAllRequests = async (req, res) => {
 }
 
 exports.getAllPost = async (req, res) => {
-    await Formpost.find({ isConfirmed: true })
+    await Formpost.find({ isConfirmed: true}).sort({ createdAt: -1 })
         .then((response) => {
             res.status(200).json(response)
         }).catch((err) => {

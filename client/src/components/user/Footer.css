@@ -1,11 +1,13 @@
 .footer-bg{
     background-color: #687EFF;
     width: 100%;
-    position: absolute;
+    flex-direction: column;
 }
 
 .footer-container-1{
     padding-top: 20px;
+    flex: 1;
+    flex-direction: column;
 }
 
 .footer-head{
@@ -44,6 +46,7 @@
     gap: 5em;
     justify-content: center;
     padding-top: 20px;
+    flex: 1;
 }
 
 .foot-logo-image{
@@ -70,47 +73,21 @@
     padding-top: 20px;
     color:white;
     padding-bottom: 20px;
-}
-
-@media only screen and (min-width: 425px) {
-    .footer-bg{
-        width: 500px;
-    }
+    flex: 1;
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .footer-bg{
-        width: 600px;
+        width: 800px;
     }
+
+    .footer-container-2 {
+        flex-direction: column;
+        align-items: center;
+      }
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .footer-bg{
-        width: 600px;
-    }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    .footer-bg{
-        width: 768px;
-    }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-    .footer-bg{
-        width: 992px;
-    }
-}
-
-@media only screen and (min-width: 1024px) {
-    .footer-bg{
-        width: 1024px;
-    }
-}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
