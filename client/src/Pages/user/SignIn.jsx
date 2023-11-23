@@ -3,6 +3,8 @@ import './SignIn.css';
 import LogoImg from '../../images/logo-icon-bt-blue.png'
 import Swal from "sweetalert2";
 import axios from "axios";
+import Navbar from "../../components/user/Navbar";
+import Footer from "../../components/user/Footer";
 import { authenticate } from "../../service/autherize";
 import { useNavigate } from "react-router-dom";
 
@@ -44,6 +46,7 @@ const SignIn = () => {
 
   return (
     <>
+      <Navbar />
       <div class="container-body-signin">
         <div class="container-body-signin-config">
           <div className="body-signup-card">
@@ -94,6 +97,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

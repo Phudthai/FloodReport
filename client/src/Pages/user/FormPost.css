@@ -2,13 +2,14 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 400px;
+    height: 500px;
     padding: 60px 0;
 }
 
 .form-row4-button {
     display: flex;
     justify-content: center;
+    padding-bottom: 20px;
 }
 
 .form-row4-button-1{

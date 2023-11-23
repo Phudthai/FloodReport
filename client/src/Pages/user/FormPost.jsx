@@ -164,7 +164,7 @@ export default function FormPost() {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+       <Footer />
     </div> 
   );
 }

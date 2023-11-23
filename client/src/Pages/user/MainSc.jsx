@@ -40,10 +40,10 @@ export default function MainSc() {
             <div>สถานะน้ำท่วม</div>
             </Col>
             <Col className="table-data">
-              <div>เขต</div>
+              <div>แขวง</div>
             </Col>
             <Col className="table-data">
-            <div>แขวง</div>
+            <div>เขต</div>
             </Col>
             <Col className="table-data">
             <div>รายละเอียด</div>
@@ -65,10 +65,10 @@ export default function MainSc() {
               <div>{formpost.status}</div>
             </Col>
             <Col className="table-data">
-            <div>{formpost.area}</div>
+            <div>{formpost.district}</div>
             </Col>
             <Col className="table-data">
-              <div>{formpost.district}</div>
+              <div>{formpost.area}</div>
             </Col>
             <Col className="table-data">
             <div>{formpost.information.substring(0,10)+'...'}</div>
