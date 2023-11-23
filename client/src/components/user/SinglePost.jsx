@@ -1,8 +1,13 @@
 import "./Navbar.css";
+import "./SinglePost.css";
 import logoImg from "../../images/logo-icon-s-blue.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Navbar from "./Navbar";
 import axios from "axios";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
 export default function SinglePost(props) {
 
     const [formposts, setFormposts] = useState([]);
@@ -23,22 +28,37 @@ export default function SinglePost(props) {
     }, [])
 
     return (
-        <div>
-            {/* district */}
-            <p>district</p>
-            <p> : {formposts.district}</p>
-            {/* area */}
-            <p>area</p>
-            <p> : {formposts.area}</p>
-            {/* information */}
-            <p>information</p>
-            <p> : {formposts.information}</p>
+        <div >
+            <Navbar />
+            <div className="moreInfo-outer">
+            <Row className="moreInfo">
+            <Col className="col-left">
             {/* image */}
-            <p>image</p>
-            <img src={formposts.image} alt=""></img>
+            <div className="info-img">
+            <img src={formposts.image} alt=""className="s-img" ></img>
+            </div>
+            </Col>
+            <Col className="col-right">
+            <Row><div className="tag">{formposts.status}</div></Row>
+            <Row>{formposts.district}</Row>
+            <Row>{formposts.area}</Row>
+            <Row>{formposts.information}</Row>
             {/* status */}
-            <p>status</p>
-            <p> : {formposts.status}</p>
+            
+            {/* district */}
+            
+            {/* area */}
+            
+            {/* information */}
+            
+            </Col>
+            </Row>
+            </div>
+            
+            
+            
+            
+            
         </div>
     )
 }
