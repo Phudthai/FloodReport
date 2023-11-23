@@ -11,15 +11,6 @@ exports.getAllRequests = async (req, res) => {
 };
 
 exports.getAllPost = async (req, res) => {
-<<<<<<< Updated upstream
-    await Formpost.find({ isConfirmed: true}).sort({ createdAt: -1 })
-        .then((response) => {
-            res.status(200).json(response)
-        }).catch((err) => {
-            return res.status(500).json({ message: err })
-        })
-}
-=======
   await Formpost.find({ isConfirmed: true })
     .sort({ createdAt: -1 })
     .then((response) => {
@@ -29,7 +20,6 @@ exports.getAllPost = async (req, res) => {
       return res.status(500).json({ message: err });
     });
 };
->>>>>>> Stashed changes
 
 exports.singleRequest = async (req, res) => {
   const { slug } = req.params;

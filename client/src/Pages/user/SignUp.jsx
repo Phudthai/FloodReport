@@ -6,6 +6,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { authenticate } from "../../service/autherize";
+import Navbar from "../../components/user/Navbar";
+import Footer from "../../components/user/Footer";
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -54,6 +56,7 @@ const SignUp = () => {
   }
   return (
     <>
+    <Navbar/>
       <div className="container-body-signup">
         <div class="container-body-signup-config">
           <div className="body-signup-card">
@@ -139,7 +142,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-
+    <Footer/>
     </>
   );
 }

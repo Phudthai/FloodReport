@@ -28,61 +28,62 @@ export default function SinglePost(props) {
     }, [])
 
     return (
-        <div >
-            <Navbar />
-            <div className="moreInfo-outer">
-            <Row className="moreInfo">
+      <div>
+        <Navbar />
+        <div className="moreInfo-outer">
+          <Row className="moreInfo">
             <Col>
-            {/* image */}
-            <div className="info-img">
-            <img src={formposts.image} alt=""className="s-img" ></img>
-            </div>
+              {/* image */}
+              <div className="info-img">
+                <img src={formposts.image} alt="" className="s-img"></img>
+              </div>
             </Col>
             <Col>
-    
-            <Row className="tag-section"><div className="tag">{formposts.status}</div></Row>
-            <div className="info-desc">
-            <Row>
-                <Col>
-                <p className="info-desc-text">แขวง:</p>
-                </Col>
-                <Col>{formposts.district}</Col>
-            </Row>
-            <Row>
-                <Col><p className="info-desc-text">เขต:</p></Col>
-                <Col>{formposts.area}</Col>
-            </Row>
-            <Row>
-                <Col><p className="info-desc-text">รายละเอียดเพิ่มเติม:</p></Col>
-                <Col >{formposts.information}</Col>
-            </Row>
-            <div>
+              <Row className="tag-section">
+                <div className="tag">{formposts.status}</div>
+              </Row>
+              <div className="info-desc">
                 <Row>
-                    <p>ข้อมูลจาก: @asdasd.com</p>
+                  <Col>
+                    <p className="info-desc-text">แขวง:</p>
+                  </Col>
+                  <Col>{formposts.district}</Col>
                 </Row>
                 <Row>
-                    <p>ทำการโพสเมื่อ: xx/xx/xx xx:xx น.</p>
+                  <Col>
+                    <p className="info-desc-text">เขต:</p>
+                  </Col>
+                  <Col>{formposts.area}</Col>
                 </Row>
-            </div>
-            </div>
-            
-            
-            {/* status */}
-            
-            {/* district */}
-            
-            {/* area */}
-            
-            {/* information */}
-            
+                <Row>
+                  <Col>
+                    <p className="info-desc-text">รายละเอียดเพิ่มเติม:</p>
+                  </Col>
+                  <Col>{formposts.information}</Col>
+                </Row>
+                <div>
+                  <Row>
+                    <p>ข้อมูลจาก: {formposts.email}</p>
+                  </Row>
+                  <Row>
+                    <p>
+                      ทำการโพสเมื่อ:{" "}
+                      {new Date(formposts.createdAt).toLocaleString()}
+                    </p>
+                  </Row>
+                </div>
+              </div>
+
+              {/* status */}
+
+              {/* district */}
+
+              {/* area */}
+
+              {/* information */}
             </Col>
-            </Row>
-            </div>
-            
-            
-            
-            
-            
+          </Row>
         </div>
-    )
+      </div>
+    );
 }
