@@ -22,6 +22,9 @@
     border-radius: 10px;
 }
 
+.tag-section{
+    padding-top: 20px;
+}
 .tag{
     border: 1px solid #687EFF;
     color: #192655;
@@ -33,10 +36,19 @@
     justify-items: center;
 }
 
-.col-left{
-    align-items: right;
+.info-desc{
+    padding-top: 50px;
+    width: 300px;
 }
 
-.col-right{
-    align-items: left;
+.info-desc-text{
+    font-size: 16px;
+    font-weight: 900;
+    color: #192655;
+    text-align: right;
+}
+
+.info-desc-border{
+    border: 1px solid #687EFF;
+    border-radius: 4px;
 }

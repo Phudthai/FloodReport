@@ -32,17 +32,41 @@ export default function SinglePost(props) {
             <Navbar />
             <div className="moreInfo-outer">
             <Row className="moreInfo">
-            <Col className="col-left">
+            <Col>
             {/* image */}
             <div className="info-img">
             <img src={formposts.image} alt=""className="s-img" ></img>
             </div>
             </Col>
-            <Col className="col-right">
-            <Row><div className="tag">{formposts.status}</div></Row>
-            <Row>{formposts.district}</Row>
-            <Row>{formposts.area}</Row>
-            <Row>{formposts.information}</Row>
+            <Col>
+    
+            <Row className="tag-section"><div className="tag">{formposts.status}</div></Row>
+            <div className="info-desc">
+            <Row>
+                <Col>
+                <p className="info-desc-text">แขวง:</p>
+                </Col>
+                <Col>{formposts.district}</Col>
+            </Row>
+            <Row>
+                <Col><p className="info-desc-text">เขต:</p></Col>
+                <Col>{formposts.area}</Col>
+            </Row>
+            <Row>
+                <Col><p className="info-desc-text">รายละเอียดเพิ่มเติม:</p></Col>
+                <Col >{formposts.information}</Col>
+            </Row>
+            <div>
+                <Row>
+                    <p>ข้อมูลจาก: @asdasd.com</p>
+                </Row>
+                <Row>
+                    <p>ทำการโพสเมื่อ: xx/xx/xx xx:xx น.</p>
+                </Row>
+            </div>
+            </div>
+            
+            
             {/* status */}
             
             {/* district */}
