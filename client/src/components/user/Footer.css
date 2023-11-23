@@ -1,6 +1,7 @@
 .footer-bg{
     background-color: #687EFF;
     width: 100%;
+    position: absolute;
 }
 
 .footer-container-1{
@@ -71,8 +72,49 @@
     padding-bottom: 20px;
 }
 
-.hr-config {
-    width:50%;
-    justify-content: center;
-    align-self: center;
+@media only screen and (min-width: 425px) {
+    .footer-bg{
+        width: 500px;
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .footer-bg{
+        width: 600px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .footer-bg{
+        width: 600px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .footer-bg{
+        width: 768px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .footer-bg{
+        width: 992px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .footer-bg{
+        width: 1024px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .footer-bg{
+        width: 100%;
+    }
 }

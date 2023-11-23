@@ -4,7 +4,8 @@ import logoImg from "../../images/logo-icon-bt-white.png";
 
 export default function Footer() {
   return (
-    <nav className="footer-bg">
+    <div>
+<nav className="footer-bg">
         <nav className="footer-container-1">
             <nav className="footer-head">
                 <label>เว็ปไซต์ของเรามีประโยชน์หรือไม่ ?</label>
@@ -45,5 +46,7 @@ export default function Footer() {
             <label>Copyright © 2023 Flood Report</label>
         </nav>
     </nav>
+    </div>
+    
   );
 }

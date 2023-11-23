@@ -2,6 +2,10 @@ import "./Navbar.css";
 import logoImg from "../../images/logo-icon-s-blue.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import NavB from 'react-bootstrap/Nav';
+import NavbarB from 'react-bootstrap/Navbar';
+
 export default function Navbar() {
   const [user, setUser] = useState();
 
@@ -30,24 +34,54 @@ export default function Navbar() {
     }
   }, [user]);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/">
+    <NavbarB collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Container>
+      <NavbarB.Brand href="/">
         <div className="Logo">
           <img src={logoImg} alt="" className="logo-image" />
         </div>
-      </a>
-
-      <div className="nav-buttons">
+      </NavbarB.Brand>
+      <NavbarB.Toggle aria-controls="responsive-navbar-nav" />
+      <NavbarB.Collapse id="responsive-navbar-nav">
+        <NavB className="me-auto">
+        </NavB>
+        <NavB>
         <div className="nav-email">
           <a type="button" onClick={logout}>
-            สวัสดี,{user}
+            เข้าสู่ระบบโดย, {user}
           </a>
-        </div>
+        </div>  
         <button onClick={handleClick} className="btn custom-button1">แจ้งน้ำท่วม</button>
-        <a className="btn custom-button2" href="#check">
+        <a className="btn custom-button2" href="/">
           ตรวจสอบพื้นที่ของคุณ
         </a>
-      </div>
-    </nav>
+          {/* <NavB.Link href="#deets">More deets</NavB.Link>
+          <NavB.Link eventKey={2} href="#memes">
+            Dank memes
+          </NavB.Link> */}
+        </NavB>
+      </NavbarB.Collapse>
+    </Container>
+  </NavbarB>
+
+    // <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    //   <a className="navbar-brand" href="/">
+    //     <div className="Logo">
+    //       <img src={logoImg} alt="" className="logo-image" />
+    //     </div>
+    //   </a>
+
+    //   <div className="nav-buttons">
+    //     <div className="nav-email">
+    //       <a type="button" onClick={logout}>
+    //         สวัสดี,{user}
+    //       </a>
+    //     </div>
+    //     <button onClick={handleClick} className="btn custom-button1">แจ้งน้ำท่วม</button>
+    //     <a className="btn custom-button2" href="#check">
+    //       ตรวจสอบพื้นที่ของคุณ
+    //     </a>
+    //   </div>
+    // </nav>
   );
 }
