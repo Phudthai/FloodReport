@@ -8,6 +8,7 @@ import Main from "./Pages/user/MainSc";
 import FormPost from "./Pages/user/FormPost";
 import MainAdmin from "./Pages/admin/MainScAdmin";
 import SinglePost from "./components/user/SinglePost";
+import Donate from "./Pages/user/Donate";
 function App() {
 
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="formpost" element={<FormPost />} />
+        <Route path='donate' element={<Donate />} />
         <Route path="admin" element={<MainAdmin />} />
         <Route path="post/:slug" element={<SinglePost/>}/>
       </Routes>
