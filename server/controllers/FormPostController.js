@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 
 exports.sendRequest = async (req, res) => {
     const { loadUser, district, area, information, pic, status } = req.body
-    console.log(pic)
+
     let slug = uuidv4()
     if (loadUser) {
         await formposts.create({

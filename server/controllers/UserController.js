@@ -64,7 +64,3 @@ exports.signin = async (req, res) => {
     return res.status(400).json({ error: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง" })
   }
 }
-
-exports.currentEmail = async (req, res) => {
-
-}
