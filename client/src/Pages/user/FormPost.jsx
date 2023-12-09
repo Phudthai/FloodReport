@@ -162,7 +162,7 @@ export default function FormPost() {
             </Col>
           </Row>
           <Row>
-            <Col>แขวง/ตำบล:</Col>
+            <Col>เขต/อำเภอ:</Col>
           </Row>
           <Row className="d-flex justify-content-center">
             <Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
@@ -180,7 +180,7 @@ export default function FormPost() {
             </Col>
           </Row>
           <Row>
-            <Col>เขต/อำเภอ:</Col>
+            <Col>แขวง/ตำบล:</Col>
           </Row>
           <Row className="d-flex justify-content-center">
             <Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
