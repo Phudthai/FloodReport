@@ -12,7 +12,6 @@ exports.getAllRequests = async (req, res) => {
 
 exports.getAllPost = async (req, res) => {
   await Formpost.find({ isConfirmed: true })
-    .sort({ createdAt: -1 })
     .then((response) => {
       res.status(200).json(response);
     })
@@ -65,10 +64,7 @@ exports.updateComfirmed = async (req, res) => {
 };
 
 exports.filterPost = async (req, res) => {
-  const {
-    districtName,
-    subdistrictName,
-  } = req.body;
+  const { districtName, subdistrictName } = req.body;
 
   let filters = {};
   let filtersArray = [];
@@ -80,9 +76,9 @@ exports.filterPost = async (req, res) => {
     filters.$and = filtersArray;
   }
   try {
-    const filtersposts = await Formpost.find(filters).sort({ createdAt: -1 });
+    const filtersposts = await Formpost.find(filters);
     res.json(filtersposts);
   } catch (error) {
     res.status(404).json({ error: "ไม่พบโพสต์ที่ตรงกับเงื่อนไข" });
   }
-}
+};
