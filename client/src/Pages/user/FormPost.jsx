@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import "./FormPost.css";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -134,6 +135,9 @@ export default function FormPost() {
 
 	return (
     <Container className="vh-100">
+      <Helmet>
+      <title>Flood Report Form Post</title>
+    </Helmet>
       <Row
         className="text-center mt-5"
         style={{ color: "#192655", fontSize: 16, fontWeight: 400 }}
