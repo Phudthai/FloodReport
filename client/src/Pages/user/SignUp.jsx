@@ -53,8 +53,8 @@ const SignUp = () => {
     }
   }
   return (
-    <>
-      <div className="container-body-signup">
+    <div className="vh-100 d-flex">
+      <div className="container-body-signup m-auto">
         <div class="container-body-signup-config">
           <div className="body-signup-card">
             <img src={LogoImg} className="LogoImg-image" alt="" />
@@ -140,7 +140,7 @@ const SignUp = () => {
         </div>
       </div>
 
-    </>
+    </div>
   );
 }
 export default SignUp;

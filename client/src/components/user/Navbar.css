@@ -1,3 +1,39 @@
+
+
+.Logo {
+    overflow: hidden;
+    height: 40px;
+    width: 120px;
+    object-fit: cover;
+    align-items: center;
+    justify-items: center;
+    display: flex;
+}
+
+.logo-image {
+    object-fit: cover;
+    overflow: hidden;
+}
+
+
+/* .navbar{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    text-align:center;
+    background-color: white;
+    position: fixed;
+    z-index: 1;
+    border-bottom: 1px solid #80B3FF;
+    justify-items: center;
+}  */
+
+.navbar{
+    width:100%;
+    background-color: white;
+    border-bottom: 1px solid #80B3FF;
+}
+
 .custom-button1 {
     width: 120px;
     height: 40px;
@@ -34,55 +70,38 @@
     border: 1px solid #687EFF;
 }
 
-.Logo {
-    overflow: hidden;
-    height: 40px;
-    width: 120px;
-    object-fit: cover;
-    align-items: center;
-    justify-items: center;
-    display: flex;
-}
+.nav-transparent-button {
+    --bs-btn-color: #687EFF;
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: #687EFF;
+    --bs-btn-hover-bg: transparent;
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-color: #687EFF;
+    --bs-btn-active-bg: transparent;
+    --bs-btn-active-border-color: transparent;
+  }
 
-.logo-image {
-    object-fit: cover;
-    overflow: hidden;
-}
+.nav-primary-button {
+    --bs-btn-color: white;
+    --bs-btn-bg: #687EFF;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-bg: #687EFF;
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-color: white;
+    --bs-btn-active-bg: #687EFF;
+    --bs-btn-active-border-color: transparent;
+  }
 
-.nav-buttons {
-    position: absolute;
-    right: 0;
-    display: flex;
-    margin: 5px;
-}
-
-.nav-email {
-    margin-right: 10px;
-    margin-top: 15px;
-}
-
-.custom-button1 {
-    margin-right: 10px;
-}
-
-.custom-button2 {
-    margin-right: 10px;
-}
-
-/* .navbar{
-    height: 60px;
-    width: 100%;
-    display: flex;
-    text-align:center;
-    background-color: white;
-    position: fixed;
-    z-index: 1;
-    border-bottom: 1px solid #80B3FF;
-    justify-items: center;
-}  */
-
-.navbar{
-    width:100%;
-    background-color: white;
-    border-bottom: 1px solid #80B3FF;
-}
+  .nav-secondary-button {
+    --bs-btn-color: #687EFF;
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: #687EFF;
+    --bs-btn-hover-color: #687EFF;
+    --bs-btn-hover-bg: transparent;
+    --bs-btn-hover-border-color: #687EFF;
+    --bs-btn-active-color: #687EFF;
+    --bs-btn-active-bg: transparent;
+    --bs-btn-active-border-color: #687EFF;
+  }
