@@ -15,13 +15,26 @@
     overflow: hidden;
 }
 
-.bg-img{
-  background-image:url("https://res.cloudinary.com/dlw7n48ff/image/upload/v1702092916/bg-img_mtngxv.png"); /* Replace with the path to your image */
-  background-size: cover; /* Ensure the image covers the entire container */
-  background-position: center; /* Center the background image */
-  color: #ffffff; /* Set text color to make it readable on the background */
-  padding: 20px; /* Add padding as needed */
+.main-primary-button {
+  --bs-btn-color: white;
+  --bs-btn-bg: #687EFF;
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-color: white;
+  --bs-btn-hover-bg: #687EFF;
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-active-color: white;
+  --bs-btn-active-bg: #687EFF;
+  --bs-btn-active-border-color: transparent;
 }
-.tag-section{
-  width: 200px;
+
+.primary-tag {
+  --bs-btn-color: #687EFF;
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: #687EFF;
+  --bs-btn-hover-color: white;
+  --bs-btn-hover-bg: #687EFF;
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-active-color: #687EFF;
+  --bs-btn-active-bg: transparent;
+  --bs-btn-active-border-color: #687EFF;
 }

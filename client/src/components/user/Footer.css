@@ -1,0 +1,23 @@
+.nav-donate-button {
+    --bs-btn-color: #687EFF;
+    --bs-btn-bg: #B6FFFA;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: #687EFF;
+    --bs-btn-hover-bg: #B6FFFA;
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-color: #687EFF;
+    --bs-btn-active-bg: #B6FFFA;
+    --bs-btn-active-border-color: transparent;
+  }
+
+  .nav-footer-button {
+    --bs-btn-color: #FFF;
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: #FFF;
+    --bs-btn-hover-bg: transparent;
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-color: #FFF;
+    --bs-btn-active-bg: transparent;
+    --bs-btn-active-border-color: transparent;
+  }

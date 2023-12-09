@@ -51,7 +51,7 @@ export default function Navbar() {
           className="justify-content-end"
         >
           <NavB className="gap-2">
-            {user === "Guest" && (
+              {user === "Guest" && (
               <Button href="/signin" className="nav-transparent-button">
                 เข้าสู่ระบบโดย, {user} กดที่นี่เพื่อเข้าสู่ระบบ
               </Button> 

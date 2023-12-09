@@ -118,7 +118,7 @@ export default function MainSc() {
         </Col>
       </Row>
       <Row className="text-center my-3">
-        <Col>
+        <Col xxl={4} xl={4} lg={4} md={5} sm={12} xs={12} className="my-2">
           <Row>
             <Col className="m-auto">แขวง / ตำบล</Col>
             <Col>
@@ -137,7 +137,7 @@ export default function MainSc() {
             </Col>
           </Row>
         </Col>
-        <Col>
+        <Col xxl={4} xl={4} lg={4} md={5} sm={12} xs={12} className="my-2">
           <Row>
             <Col className="m-auto">เขต / อำเภอ</Col>
             <Col>
@@ -156,8 +156,8 @@ export default function MainSc() {
             </Col>
           </Row>
         </Col>
-        <Col>
-          <Button variant="primary" className="m-auto" onClick={handleFilter}>
+        <Col xxl={4} xl={4} lg={4} md={2} sm={12} xs={12} className="my-2">
+          <Button className="m-auto main-primary-button w-75 " onClick={handleFilter}>
             ค้นหา
           </Button>
         </Col>
@@ -194,97 +194,91 @@ export default function MainSc() {
                     <td>
                       {/* <Link to={`/post/${formpost.slug}`}>ดูเพิ่มเติม</Link> */}
                       <Button
-                        variant="primary"
+                        className="main-primary-button"
                         onClick={() => handleShowModal(formpost)}
                       >
                         เปิด
                       </Button>
 
                       <Modal
-                        show={show}
-                        onHide={handleCloseModal}
-                        size="lg"
-                        aria-labelledby="contained-modal-title-vcenter"
-                        centered
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title>ดูรายละเอียดเพิ่มเติม</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <Container>
-                            <Row>
-                              <Col>
-                                <div className="info-img">
-                                  <img
-                                    src={modalformpost.image}
-                                    alt=""
-                                    className="s-img"
-                                    style={{
-                                      width: 300,
-                                      height: 400,
-                                      borderRadius: 10,
-                                    }}
-                                  ></img>
-                                </div>
-                              </Col>
-                              <Col>
-                                <Container>
-                                  <Row className="tag-section">
-                                    <div className="tag">
-                                      {modalformpost.status}
-                                    </div>
-                                  </Row>
-                                  <div className="info-desc">
-                                    <Row>
-                                      <Col>
-                                        <p className="info-desc-text">แขวง:</p>
-                                      </Col>
-                                      <Col>{modalformpost.district}</Col>
-                                    </Row>
-                                    <Row>
-                                      <Col>
-                                        <p className="info-desc-text">เขต:</p>
-                                      </Col>
-                                      <Col>{modalformpost.area}</Col>
-                                    </Row>
-                                    <Row>
-                                      <Col>
-                                        <p className="info-desc-text">
-                                          รายละเอียดเพิ่มเติม:
-                                        </p>
-                                      </Col>
-                                      <Col>{modalformpost.information}</Col>
-                                    </Row>
-                                    <div>
-                                      <Row>
-                                        <p>ข้อมูลจาก: {modalformpost.email}</p>
-                                      </Row>
-                                      <Row>
-                                        <p>
-                                          ทำการโพสเมื่อ:{" "}
-                                          {new Date(
-                                            modalformpost.createdAt
-                                          ).toLocaleDateString()}{" "}
-                                          เวลา{" "}
-                                          {new Date(
-                                            modalformpost.createdAt
-                                          ).toLocaleTimeString([], {
-                                            hour: "2-digit",
-                                            minute: "2-digit",
-                                          })}{" "}
-                                          น.
-                                        </p>
-                                      </Row>
-                                    </div>
-                                  </div>
-                                </Container>
-                              </Col>
-                            </Row>
-                          </Container>
-                        </Modal.Body>
+											show={show}
+											onHide={handleCloseModal}
+											size="lg"
+											aria-labelledby="contained-modal-title-vcenter"
+											centered
+										>
+											<Modal.Header closeButton>
+												<Modal.Title>ดูรายละเอียดเพิ่มเติม</Modal.Title>
+											</Modal.Header>
+											<Modal.Body>
+												<Container>
+													<Row>
+														<Col className="d-flex">
+															<img
+																src={modalformpost.image}
+																alt=""
+																className="m-auto"
+																style={{
+																	width: 300,
+																	height: 400,
+																	borderRadius: 10,
+																}}
+															></img>
+														</Col>
+														<Col className="d-flex">
+															<Container>
+																<Row className="my-3">
+                                  <Col className="m-auto">
+                                  <Button className="primary-tag">
+                                    {modalformpost.status}
+                                  </Button>
+                                  </Col>
+																</Row>
+																<Row>
+																	<Col style={{ color: "#002446", fontSize: 16 }}>
+																		<p>แขวง/ตำบล:</p>
+																	</Col>
+																	<Col>{modalformpost.district}</Col>
+																</Row>
+																<Row>
+																	<Col style={{ color: "#002446", fontSize: 16 }}>
+																		<p>เขต/อำเภอ:</p>
+																	</Col>
+																	<Col>{modalformpost.area}</Col>
+																</Row>
+																<Row>
+																	<Col style={{ color: "#002446", fontSize: 16 }}>
+																		<p>รายละเอียดเพิ่มเติม:</p>
+																	</Col>
+																	<Col style={{ color: "#002446", fontSize: 16 }}>{modalformpost.information}</Col>
+																</Row>
+																<Row className="mt-5">
+																	<p style={{ color: "#808FA4", fontSize: 16 }}>ข้อมูลจาก: {modalformpost.email}</p>
+																</Row>
+																<Row>
+																	<p style={{ color: "#808FA4", fontSize: 16 }}>
+																		ทำการโพสเมื่อ:{" "}
+																		{new Date(
+																			modalformpost.createdAt
+																		).toLocaleDateString()}{" "}
+																		เวลา{" "}
+																		{new Date(
+																			modalformpost.createdAt
+																		).toLocaleTimeString([], {
+																			hour: "2-digit",
+																			minute: "2-digit",
+																		})}{" "}
+																		น.
+																	</p>
+																</Row>
+															</Container>
+														</Col>
+													</Row>
+												</Container>
+											</Modal.Body>
                         <Modal.Footer>
                           <Button
-                            variant="secondary"
+                            variant="outline-secondary"
                             onClick={handleCloseModal}
                           >
                             ปิด

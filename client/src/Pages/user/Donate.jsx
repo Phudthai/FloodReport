@@ -12,7 +12,6 @@ import Row from 'react-bootstrap/Row';
 export default function Donate() {
   return (
     <div className="main-container">
-      <Navbar />
       <div>
         <div>
             <h1>สนับสนุนพวกเรา</h1>
@@ -26,7 +25,6 @@ export default function Donate() {
             </div>
         </div>
       </div>
-       <Footer /> 
     </div>
   );
 }
