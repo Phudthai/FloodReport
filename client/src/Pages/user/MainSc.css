@@ -16,9 +16,12 @@
 }
 
 .bg-img{
-    background-image: url('F:\BU\year 4\FloodReport\client\src\images\bg-img.png'); /* Replace with the path to your image */
+  background-image:url("https://res.cloudinary.com/dlw7n48ff/image/upload/v1702092916/bg-img_mtngxv.png"); /* Replace with the path to your image */
   background-size: cover; /* Ensure the image covers the entire container */
   background-position: center; /* Center the background image */
   color: #ffffff; /* Set text color to make it readable on the background */
   padding: 20px; /* Add padding as needed */
+}
+.tag-section{
+  width: 200px;
 }

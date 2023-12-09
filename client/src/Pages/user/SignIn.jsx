@@ -34,6 +34,7 @@ const SignIn = () => {
           authenticate(res, () => navigate('/admin'))
         } else {
           authenticate(res, () => navigate('/'))
+          window.location.reload(true)
         }
       }).catch(err => {
         Swal.fire(

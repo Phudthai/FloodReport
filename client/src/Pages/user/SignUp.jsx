@@ -45,6 +45,7 @@ const SignUp = () => {
             'success'
           )
           authenticate(res, () => navigate('/'))
+          window.location.reload(true);
         }).catch((err) => {
           Swal.fire(
             'แจ้งเตือน',
