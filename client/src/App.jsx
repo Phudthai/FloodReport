@@ -9,10 +9,13 @@ import FormPost from "./Pages/user/FormPost";
 import MainAdmin from "./Pages/admin/MainScAdmin";
 import SinglePost from "./components/user/SinglePost";
 import Donate from "./Pages/user/Donate";
+import Footer from "./components/user/Footer";
+import Navbar from "./components/user/Navbar";
 function App() {
 
   return (
     <BrowserRouter>
+    <Navbar />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="signin" element={<SignIn />} />
@@ -22,6 +25,7 @@ function App() {
         <Route path="admin" element={<MainAdmin />} />
         <Route path="post/:slug" element={<SinglePost/>}/>
       </Routes>
+      <Footer /> 
     </BrowserRouter>
   );
 }

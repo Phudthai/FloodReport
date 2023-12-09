@@ -1,167 +1,24 @@
+.table-main-custom{
+    --bs-table-color: #192655;
+    --bs-table-bg: #B5D2FF;
+    --bs-table-border-color: transparent;
+    --bs-table-striped-bg: #FFFFFF;
+    --bs-table-striped-color: #192655;
+    --bs-table-active-bg: #eef0ff;
+    --bs-table-active-color: #192655;
+    --bs-table-hover-bg: #eef0ff;
+    --bs-table-hover-color: #192655;
 
-/* .menusc {
-    position: absolute;
-    height: 150px;
-    width: 250px;
-    border: 1px solid #687EFF;
-    margin-top: -80px;
-    right: 100px;
-}
-
-h1 {
     color: #192655;
-    font-size: 64px;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
-    font-weight: 700;
-    word-wrap: break-word;
-}
-
-.head-center-text{
-    padding-top: 100px;
-    text-align: center;
-}
-
-.custom-dropdown {
-    width: 150px;
-    height: 40px;
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.table-container {
-    display: flex;
-    justify-content: center;
-}
-
-.custom-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.custom-table th,.custom-table td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: center;
-} */
-
-.main-container{
-    padding: 0;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
-}
-
-.table-header-hero {
-    padding: 40px 0;
-    text-align: center;
-    width: 100%;
-}
-
-.table-header-text{
-    font-family: 'IBM Plex Sans Thai', sans-serif;
-    color: #192655;
-}
-
-.table-wrapper {
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: auto;
-    height: 800px;
-}
-
-.table-header{
-    text-align: center;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
-    color: #192655;
-    font-weight: 900;
-    background: #B5D2FF;
-    border: 1px solid #687EFF;
+    border-color: transparent;
     border-radius: 4px;
-    height: 40px;
-    align-items: center;
+    overflow: hidden;
 }
 
-.table-data{
-    text-align: center;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
-    color: #192655;
-    align-items: center;
-}
-
-.table-data-fetch{
-    padding: 10px 0px;
-    border-bottom: 1px solid #687EFF;
-    border-left: 1px solid #687EFF;
-    border-right: 1px solid #687EFF;
-    border-radius: 4px;
-}
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-    .table-header-hero {
-        width: 600px;
-    }
-
-    .table-wrapper {
-        width: 600px;
-    }
-
-    .table-header{
-        font-weight: 900;
-        font-size: 16px;
-        height: 70px;
-    }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .table-wrapper {
-        width: 600px;
-    }
-
-    .table-header{
-        font-weight: 900;
-        font-size: 16px;
-        height: 60px;
-    }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    .table-wrapper {
-        justify-content: center;
-        align-items: center;
-        width: 700px;
-        margin: auto;
-    }
-    .table-header{
-        font-weight: 900;
-        font-size: 16px;
-        height: 60px;
-    }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-    .table-wrapper {
-        width: 900px;
-    }
-    .table-header{
-        font-weight: 800;
-        font-size: 16px;
-        height: 40px;
-    }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-    .table-wrapper {
-        width: 1000px;
-    }
-    .table-header{
-        font-weight: 800;
-        font-size: 16px;
-        height: 40px;
-    }
+.bg-img{
+    background-image: url('F:\BU\year 4\FloodReport\client\src\images\bg-img.png'); /* Replace with the path to your image */
+  background-size: cover; /* Ensure the image covers the entire container */
+  background-position: center; /* Center the background image */
+  color: #ffffff; /* Set text color to make it readable on the background */
+  padding: 20px; /* Add padding as needed */
 }

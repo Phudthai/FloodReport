@@ -45,9 +45,8 @@ const SignIn = () => {
   }
 
   return (
-    <>
-      <Navbar />
-      <div class="container-body-signin">
+    <div className="vh-100 d-flex">
+      <div class="container-body-signin m-auto">
         <div class="container-body-signin-config">
           <div className="body-signup-card">
             <img src={LogoImg} className="LogoImg-image" alt="" />
@@ -97,8 +96,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 }
 export default SignIn;
