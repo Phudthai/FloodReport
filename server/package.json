@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon app/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm i"
   },
@@ -23,8 +23,5 @@
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.1",
     "uuid": "^9.0.1"
-  },
-  "engines": {
-    "node": ">=18.18.0 <19.0.0"
   }
 }
