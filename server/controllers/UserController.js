@@ -64,3 +64,17 @@ exports.signin = async (req, res) => {
     return res.status(400).json({ error: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง" })
   }
 }
+
+exports.checkAdmin = async (req, res) => {
+  const {email} = req.body
+  await User.findOne({email: email})
+  .then((user) => {
+    if (user.role === "admin") {
+      res.json(true)
+    } else {
+      res.json(false)
+    }
+  }).catch((err) => {
+    res.status(400).json({error: err})
+  })
+}

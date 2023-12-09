@@ -13,10 +13,11 @@ import Button from "react-bootstrap/esm/Button";
 
 export default function FormPost() {
 	const navigate = useNavigate();
-
+	const [districtlist, setDistrictlist] = useState([]);
+	const [subdistrictlist, setSubDistrictlist] = useState([]);
+	const [districtName, setDistrictName] = useState("");
+	const [subdistrictName,setSubDistrictName] = useState("");
 	const [state, setState] = useState({
-		district: "",
-		area: "",
 		information: "",
 		status: "",
 	});
@@ -34,14 +35,52 @@ export default function FormPost() {
 		const file = e.target.files[0];
 		setImage(file);
 	};
+	const loadData = async () => {
+		await axios
+      .get(`https://ckartisan.com/api/amphoes?province=กรุงเทพมหานคร`)
+      .then((res) => {
+        setDistrictlist(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+	}
+	useEffect(() => {
+		loadData()
+	},[])
+
+	const onChangesDistrict = async (event) => {
+		setDistrictName(event.target.value);
+		await axios
+          .get(
+            `https://ckartisan.com/api/tambons?province=กรุงเทพมหานคร&amphoe=${event.target.value}`
+          )
+          .then((res) => {
+            setSubDistrictlist(res.data);
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+	}
+	const onChangeSubDistrict = async (event) => {
+    setSubDistrictName(event.target.value);
+	console.log(event.target.value);
+  };
 
 	const submitButton = async (e) => {
 		e.preventDefault();
 
-		if (district === "" || area === "" || information === "" || status === "") {
-			await Swal.fire("แจ้งเตือน", "กรุณากรอกข้อมูลให้ครบถ้วน", "error");
-			return;
-		}
+		if (
+      districtName === "" ||
+      subdistrictName === "" ||
+      information === "" ||
+      status === ""
+    ) {
+      await Swal.fire("แจ้งเตือน", "กรุณากรอกข้อมูลให้ครบถ้วน", "error");
+      return;
+    }
 
 		if (image === null) {
 			Swal.fire("แจ้งเตือน", "โปรดเลือกรูปภาพ", "error");
@@ -72,192 +111,197 @@ export default function FormPost() {
 	};
 	useEffect(() => {
 		const loadUser = localStorage.getItem("email").replace(/"/g, "");
-
+		console.log(loadUser, subdistrictlist, subdistrictName, information, pic, status);
 		if (uploaded) {
 			axios
-				.post(`${process.env.REACT_APP_API}/formpost`, {
-					loadUser,
-					district,
-					area,
-					information,
-					pic,
-					status,
-				})
-				.then(async (res) => {
-					await Swal.fire("แจ้งเตือน", res.data.message, "success");
-					navigate("/");
-				})
-				.catch(async (err) => {
-					await Swal.fire("แจ้งเตือน", err.response.data.error, "error");
-				});
+        .post(`${process.env.REACT_APP_API}/formpost`, {
+          loadUser,
+          district: districtName,
+          area: subdistrictName,
+          information,
+          pic,
+          status,
+        })
+        .then(async (res) => {
+          await Swal.fire("แจ้งเตือน", res.data.message, "success");
+          navigate("/");
+        })
+        .catch(async (err) => {
+          await Swal.fire("แจ้งเตือน", err.response.data.error, "error");
+        });
 		}
 	}, [uploaded]);
 
 	return (
-		<Container className="vh-100">
-			<Row
-				className="text-center mt-5"
-				style={{ color: "#192655", fontSize: 16, fontWeight: 400 }}
-			>
-				<Col style={{ color: "#192655", fontSize: 64, fontWeight: 800 }}>
-					<p>แจ้งน้ำท่วม</p>
-				</Col>
-				<Container className="d-grid gap-2">
-					<Row className="mt-5">
-						<Col>เลือกสถานะน้ำท่วม:</Col>
-					</Row>
-					<Row className="d-flex justify-content-center">
-						<Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
-							<Form.Select
-								aria-label="Default select example"
-								onChange={inputValue("status")}
-							>
-								<option>กรุณาเลือก</option>
-								<option value="น้ำท่วมขังเล็กน้อย">น้ำท่วมขังเล็กน้อย</option>
-								<option value="น้ำท่วมขังมาก">น้ำท่วมขังมาก</option>
-							</Form.Select>
-						</Col>
-					</Row>
-					<Row>
-						<Col>แขวง/ตำบล:</Col>
-					</Row>
-					<Row className="d-flex justify-content-center">
-						<Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
-							<Form.Select
-								aria-label="Default select example"
-								onChange={inputValue("district")}
-							>
-								<option>หา</option>
-								<option value="แขวง">API</option>
-								<option value="ตำบล">มาใส่</option>
-							</Form.Select>
-						</Col>
-					</Row>
-					<Row>
-						<Col>เขต/อำเภอ:</Col>
-					</Row>
-					<Row className="d-flex justify-content-center">
-						<Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
-							<Form.Select
-								aria-label="Default select example"
-								onChange={inputValue("area")}
-							>
-								<option>หา</option>
-								<option value="เขต">API</option>
-								<option value="อำเภอ">มาใส่</option>
-							</Form.Select>
-						</Col>
-					</Row>
-					<Row>
-						<Col>กรอกรายละเอียดเพิ่มเติม:</Col>
-					</Row>
-					<Row className="d-flex justify-content-center">
-						<Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
-							<FloatingLabel
-								controlId="floatingTextarea2"
-								label="กรุณากรอกรายละเอียดเพิ่มเติม"
-							>
-								<Form.Control
-									as="textarea"
-									placeholder="Leave a comment here"
+    <Container className="vh-100">
+      <Row
+        className="text-center mt-5"
+        style={{ color: "#192655", fontSize: 16, fontWeight: 400 }}
+      >
+        <Col style={{ color: "#192655", fontSize: 64, fontWeight: 800 }}>
+          <p>แจ้งน้ำท่วม</p>
+        </Col>
+        <Container className="d-grid gap-2">
+          <Row className="mt-5">
+            <Col>เลือกสถานะน้ำท่วม:</Col>
+          </Row>
+          <Row className="d-flex justify-content-center">
+            <Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
+              <Form.Select
+                aria-label="Default select example"
+                onChange={inputValue("status")}
+              >
+                <option>กรุณาเลือก</option>
+                <option value="น้ำท่วมขังเล็กน้อย">น้ำท่วมขังเล็กน้อย</option>
+                <option value="น้ำท่วมขังมาก">น้ำท่วมขังมาก</option>
+              </Form.Select>
+            </Col>
+          </Row>
+          <Row>
+            <Col>แขวง/ตำบล:</Col>
+          </Row>
+          <Row className="d-flex justify-content-center">
+            <Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
+              <Form.Select
+                aria-label="Default select example"
+                onChange={onChangesDistrict}
+              >
+                <option value="">กรุณาเลือก</option>
+                {districtlist.map((item, index) => (
+                  <option key={index} value={item.amphoe}>
+                    {item.amphoe}
+                  </option>
+                ))}
+              </Form.Select>
+            </Col>
+          </Row>
+          <Row>
+            <Col>เขต/อำเภอ:</Col>
+          </Row>
+          <Row className="d-flex justify-content-center">
+            <Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
+              <Form.Select
+                aria-label="Default select example"
+                onChange={onChangeSubDistrict}
+              >
+                <option value="">กรุณาเลือก</option>
+                {subdistrictlist.map((item, index) => (
+                  <option key={index} value={item.tambon}>
+                    {item.tambon}
+                  </option>
+                ))}
+              </Form.Select>
+            </Col>
+          </Row>
+          <Row>
+            <Col>กรอกรายละเอียดเพิ่มเติม:</Col>
+          </Row>
+          <Row className="d-flex justify-content-center">
+            <Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
+              <FloatingLabel
+                controlId="floatingTextarea2"
+                label="กรุณากรอกรายละเอียดเพิ่มเติม"
+              >
+                <Form.Control
+                  as="textarea"
+                  placeholder="Leave a comment here"
                   onChange={inputValue("information")}
-									style={{ height: "100px" }}
-								/>
-							</FloatingLabel>
-						</Col>
-					</Row>
-					<Row>
-						<Col>แนบรูปภาพสถานที่:</Col>
-					</Row>
-					<Row className="d-flex justify-content-center">
-						<Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
-							<Form.Group>
-								<Form.Control
+                  style={{ height: "100px" }}
+                />
+              </FloatingLabel>
+            </Col>
+          </Row>
+          <Row>
+            <Col>แนบรูปภาพสถานที่:</Col>
+          </Row>
+          <Row className="d-flex justify-content-center">
+            <Col xxl={4} xl={4} lg={5} md={6} sm={7} xs={7}>
+              <Form.Group>
+                <Form.Control
                   p={1.5}
-									type="file"
-									accept="image/*"
-									onChange={handleImage}
-								/>
-							</Form.Group>
-						</Col>
-					</Row>
-				</Container>
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImage}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+        </Container>
         <Row className="text-center m-auto mt-5">
-        <Col>
-          <Button variant="success" onClick={submitButton}>
-            ยืนยันการโพส
-          </Button>
-        </Col>
-        <Col>
-        <Button variant="outline-secondary" href="/">
-            ย้อนกลับ
+          <Col>
+            <Button variant="success" onClick={submitButton}>
+              ยืนยันการโพส
             </Button>
-        </Col>
+          </Col>
+          <Col>
+            <Button variant="outline-secondary" href="/">
+              ย้อนกลับ
+            </Button>
+          </Col>
         </Row>
-        
-			</Row>
-		</Container>
-		// <div className="test">
-		//   <div className="main-container-formpost">
-		//     <div className="report-outer">
-		//     <Row>
-		//       <Col className="report-text">
-		//         <label htmlFor="myDropdown" className="mb-3">เลือกสถานะน้ำท่วม: </label>
-		//       </Col>
-		//       <Col>
-		//         <select id="myDropdown" onChange={inputValue("status")} className="report-inputBox">
-		//           <option value=""></option>
-		//           <option value="น้ำท่วมขังเล็กน้อย">น้ำท่วมขังเล็กน้อย</option>
-		//           <option value="น้ำท่วมขังมาก">น้ำท่วมขังมาก</option>
-		//         </select>
-		//       </Col>
-		//     </Row>
-		//     <Row>
-		//       <Col>
-		//         <p className="report-text">แขวง:</p>
-		//       </Col>
-		//       <Col>
-		//         <input onChange={inputValue("district")} className="report-inputBox"/>
-		//       </Col>
-		//     </Row>
-		//     <Row>
-		//       <Col>
-		//         <p className="report-text">เขต:</p>
-		//       </Col>
-		//       <Col>
-		//         <input onChange={inputValue("area")} className="report-inputBox"/>
-		//       </Col>
-		//     </Row>
-		//     <Row>
-		//       <Col>
-		//         <p className="report-text">รายละเอียดเพิ่มเติม:</p>
-		//       </Col>
-		//       <Col>
-		//         <textarea onChange={inputValue("information")} className="report-inputBox" rows={6} cols={40}/>
-		//       </Col>
-		//     </Row>
-		//     <Row className="padbot">
-		//       <Col>
-		//         <p className="report-text">แนบรูปภาพสถานที่:</p>
-		//       </Col>
-		//       <Col>
-		//         <input type="file" p={1.5} accept="image/*" onChange={handleImage}></input>
-		//       </Col>
-		//     </Row>
-		//     <div className="form-row4-button">
-		//         <div className="form-row4-button-1">
-		//           <a href="/">
-		//             <button className="button-back">ย้อนกลับ</button>
-		//           </a>
-		//         </div>
-		//         <div className="form-row4-button-2">
-		//           <button onClick={submitButton} className="button-submit">ยืนยันการโพส</button>
-		//         </div>
-		//       </div>
-		//     </div>
-		//   </div>
-		// </div>
-	);
+      </Row>
+    </Container>
+    // <div className="test">
+    //   <div className="main-container-formpost">
+    //     <div className="report-outer">
+    //     <Row>
+    //       <Col className="report-text">
+    //         <label htmlFor="myDropdown" className="mb-3">เลือกสถานะน้ำท่วม: </label>
+    //       </Col>
+    //       <Col>
+    //         <select id="myDropdown" onChange={inputValue("status")} className="report-inputBox">
+    //           <option value=""></option>
+    //           <option value="น้ำท่วมขังเล็กน้อย">น้ำท่วมขังเล็กน้อย</option>
+    //           <option value="น้ำท่วมขังมาก">น้ำท่วมขังมาก</option>
+    //         </select>
+    //       </Col>
+    //     </Row>
+    //     <Row>
+    //       <Col>
+    //         <p className="report-text">แขวง:</p>
+    //       </Col>
+    //       <Col>
+    //         <input onChange={inputValue("district")} className="report-inputBox"/>
+    //       </Col>
+    //     </Row>
+    //     <Row>
+    //       <Col>
+    //         <p className="report-text">เขต:</p>
+    //       </Col>
+    //       <Col>
+    //         <input onChange={inputValue("area")} className="report-inputBox"/>
+    //       </Col>
+    //     </Row>
+    //     <Row>
+    //       <Col>
+    //         <p className="report-text">รายละเอียดเพิ่มเติม:</p>
+    //       </Col>
+    //       <Col>
+    //         <textarea onChange={inputValue("information")} className="report-inputBox" rows={6} cols={40}/>
+    //       </Col>
+    //     </Row>
+    //     <Row className="padbot">
+    //       <Col>
+    //         <p className="report-text">แนบรูปภาพสถานที่:</p>
+    //       </Col>
+    //       <Col>
+    //         <input type="file" p={1.5} accept="image/*" onChange={handleImage}></input>
+    //       </Col>
+    //     </Row>
+    //     <div className="form-row4-button">
+    //         <div className="form-row4-button-1">
+    //           <a href="/">
+    //             <button className="button-back">ย้อนกลับ</button>
+    //           </a>
+    //         </div>
+    //         <div className="form-row4-button-2">
+    //           <button onClick={submitButton} className="button-submit">ยืนยันการโพส</button>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+  );
 }
 {
 	/* <div className="config-container-formpost">

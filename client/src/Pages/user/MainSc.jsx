@@ -16,6 +16,11 @@ import Button from "react-bootstrap/Button";
 export default function MainSc() {
   const [formposts, setFormposts] = useState([]);
   const [modalformpost, setModalformpost] = useState([]);
+  const [districtlist, setDistrictlist] = useState([]);
+  const [subdistrictlist, setSubDistrictlist] = useState([]);
+  const [districtName, setDistrictName] = useState("");
+  const [subdistrictName, setSubDistrictName] = useState("");
+  const [filteredpost, setFilteredpost] = useState([]);
 
   const navigate = useNavigate();
   const fetchData = async () => {
@@ -31,7 +36,39 @@ export default function MainSc() {
 
   useEffect(() => {
     fetchData();
+    loadData();
   }, []);
+
+  const loadData = async () => {
+    await axios
+      .get(`https://ckartisan.com/api/amphoes?province=กรุงเทพมหานคร`)
+      .then((res) => {
+        setDistrictlist(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onChangesDistrict = async (event) => {
+    setDistrictName(event.target.value);
+    await axios
+      .get(
+        `https://ckartisan.com/api/tambons?province=กรุงเทพมหานคร&amphoe=${event.target.value}`
+      )
+      .then((res) => {
+        setSubDistrictlist(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const onChangeSubDistrict = async (event) => {
+    setSubDistrictName(event.target.value);
+    console.log(event.target.value);
+  };
 
   const [show, setShow] = useState(false);
 
@@ -39,19 +76,36 @@ export default function MainSc() {
   const handleShow = () => setShow(true);
 
   const handleShowModal = (formpost) => {
-	  setModalformpost(formpost);
-	  handleShow();
-  }
+    setModalformpost(formpost);
+    handleShow();
+  };
   const handleCloseModal = () => {
-	  setModalformpost([]);
-	  handleClose();
-  }
+    setModalformpost([]);
+    handleClose();
+  };
+
+  const handleFilter = async () => {
+    await axios
+      .post(`${process.env.REACT_APP_API}/allpost-filter`, {
+        districtName,
+        subdistrictName,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setFormposts(response.data);
+        setDistrictName("");
+        setSubDistrictName("");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
   return (
     <Container className="vh-100">
       <Row>
-        <Col>
-          <Container className="bg-img w-100 h-100 m-5"/>
-        </Col>
+        {/* <Col>
+          <Container className="bg-img w-100 h-100 m-5" />
+        </Col> */}
       </Row>
       <Row className="text-center mt-5">
         <Col style={{ color: "#192655", fontSize: 64, fontWeight: 800 }}>
@@ -68,11 +122,17 @@ export default function MainSc() {
           <Row>
             <Col className="m-auto">แขวง / ตำบล</Col>
             <Col>
-              <Form.Select aria-label="Default select example">
-                <option>กรุณาเลือก</option>
-                <option value="1">หา</option>
-                <option value="2">API</option>
-                <option value="3">มาใส่</option>
+              <Form.Select
+                aria-label="Default select example"
+                value={districtName}
+                onChange={onChangesDistrict}
+              >
+                <option value="">กรุณาเลือก</option>
+                {districtlist.map((item, index) => (
+                  <option key={index} value={item.amphoe}>
+                    {item.amphoe}
+                  </option>
+                ))}
               </Form.Select>
             </Col>
           </Row>
@@ -81,19 +141,30 @@ export default function MainSc() {
           <Row>
             <Col className="m-auto">เขต / อำเภอ</Col>
             <Col>
-              <Form.Select aria-label="Default select example">
-                <option>กรุณาเลือก</option>
-                <option value="1">หา</option>
-                <option value="2">API</option>
-                <option value="3">มาใส่</option>
+              <Form.Select
+                value={subdistrictName}
+                aria-label="Default select example"
+                onChange={onChangeSubDistrict}
+              >
+                <option value="">กรุณาเลือก</option>
+                {subdistrictlist.map((item, index) => (
+                  <option key={index} value={item.tambon}>
+                    {item.tambon}
+                  </option>
+                ))}
               </Form.Select>
             </Col>
           </Row>
         </Col>
+        <Col>
+          <Button variant="primary" className="m-auto" onClick={handleFilter}>
+            ค้นหา
+          </Button>
+        </Col>
       </Row>
       <Row>
-        <Container fluid className=" rounded">
-          <Table responsive striped hover className="table-main-custom my-5">
+        <Container fluid className=" rounded" >
+          <Table responsive striped hover className="table-main-custom my-5" >
             <thead style={{ height: 40 }} className="text-center">
               <tr>
                 <th>สถานะน้ำท่วม</th>
@@ -122,7 +193,10 @@ export default function MainSc() {
                     </td>
                     <td>
                       {/* <Link to={`/post/${formpost.slug}`}>ดูเพิ่มเติม</Link> */}
-                      <Button variant="primary" onClick={() => handleShowModal(formpost)}>
+                      <Button
+                        variant="primary"
+                        onClick={() => handleShowModal(formpost)}
+                      >
                         เปิด
                       </Button>
 
@@ -186,7 +260,20 @@ export default function MainSc() {
                                         <p>ข้อมูลจาก: {modalformpost.email}</p>
                                       </Row>
                                       <Row>
-                                        <p>ทำการโพสเมื่อ: {new Date(modalformpost.createdAt).toLocaleDateString()} เวลา {new Date(modalformpost.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} น.</p>
+                                        <p>
+                                          ทำการโพสเมื่อ:{" "}
+                                          {new Date(
+                                            modalformpost.createdAt
+                                          ).toLocaleDateString()}{" "}
+                                          เวลา{" "}
+                                          {new Date(
+                                            modalformpost.createdAt
+                                          ).toLocaleTimeString([], {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                          })}{" "}
+                                          น.
+                                        </p>
                                       </Row>
                                     </div>
                                   </div>

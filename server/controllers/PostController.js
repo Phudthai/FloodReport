@@ -63,3 +63,26 @@ exports.updateComfirmed = async (req, res) => {
       res.status(400).json({ error: err });
     });
 };
+
+exports.filterPost = async (req, res) => {
+  const {
+    districtName,
+    subdistrictName,
+  } = req.body;
+
+  let filters = {};
+  let filtersArray = [];
+
+  if (subdistrictName) filtersArray.push({ area: subdistrictName });
+  if (districtName) filtersArray.push({ district: districtName });
+
+  if (filtersArray.length > 0) {
+    filters.$and = filtersArray;
+  }
+  try {
+    const filtersposts = await Formpost.find(filters).sort({ createdAt: -1 });
+    res.json(filtersposts);
+  } catch (error) {
+    res.status(404).json({ error: "ไม่พบโพสต์ที่ตรงกับเงื่อนไข" });
+  }
+}

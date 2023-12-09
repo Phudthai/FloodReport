@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import './SignIn.css';
-import LogoImg from '../../images/logo-icon-bt-blue.png'
+import "./SignIn.css";
+import LogoImg from "../../images/logo-icon-bt-blue.png";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Navbar from "../../components/user/Navbar";
@@ -9,41 +9,34 @@ import { authenticate } from "../../service/autherize";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [state, setState] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
-  const { email, password } = state
-  
+  const { email, password } = state;
+
   const lowercaseemail = email.toLowerCase();
-  const inputValue = name => event => {
+  const inputValue = (name) => (event) => {
     setState({ ...state, [name]: event.target.value });
-  }
+  };
   const submitForm = async (e) => {
     e.preventDefault();
-    
+
     await axios
       .post(`${process.env.REACT_APP_API}/signin`, { lowercaseemail, password })
       .then(async (res) => {
         //login สำเร็จ
-        await Swal.fire('แจ้งเตือน', 'เข้าสู่ระบบสำเร็จ', 'success')
-        if (res.data.role === "admin") {
-          authenticate(res, () => navigate('/admin'))
-        } else {
-          authenticate(res, () => navigate('/'))
-          window.location.reload(true)
-        }
-      }).catch(err => {
-        Swal.fire(
-          'แจ้งเตือน',
-          err.response.data.error,
-          'error'
-        )
+        await Swal.fire("แจ้งเตือน", "เข้าสู่ระบบสำเร็จ", "success");
+        authenticate(res, () => navigate("/"));
+        window.location.reload(true);
       })
-  }
+      .catch((err) => {
+        Swal.fire("แจ้งเตือน", err.response.data.error, "error");
+      });
+  };
 
   return (
     <div className="vh-100 d-flex">
@@ -84,7 +77,8 @@ const SignIn = () => {
                 >
                   รหัสผ่าน
                 </label>
-                <input type="password"
+                <input
+                  type="password"
                   className="form-control border-form-signin border-top-0 border-end-0 border-start-0 nunito-600 nunito-placeholder"
                   placeholder="รหัสผ่าน"
                   onChange={inputValue("password")}
@@ -99,5 +93,5 @@ const SignIn = () => {
       </div>
     </div>
   );
-}
+};
 export default SignIn;
