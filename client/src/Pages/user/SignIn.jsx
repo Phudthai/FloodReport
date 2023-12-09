@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import "./SignIn.css";
 import LogoImg from "../../images/logo-icon-bt-blue.png";
 import Swal from "sweetalert2";
@@ -40,6 +41,9 @@ const SignIn = () => {
 
   return (
     <div className="vh-100 d-flex">
+    <Helmet>
+      <title>Flood Report Login Page</title>
+    </Helmet>
       <div class="container-body-signin m-auto">
         <div class="container-body-signin-config">
           <div className="body-signup-card">

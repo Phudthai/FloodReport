@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
@@ -121,6 +122,9 @@ export default function MainSc(props) {
 
 	return (
 		<Container className="vh-100">
+		<Helmet>
+      <title>Flood Report</title>
+    	</Helmet>
 			{displayPage && (
 				<Table responsive striped hover className="table-main-custom my-5">
 					<thead style={{ height: 40 }} className="text-center">

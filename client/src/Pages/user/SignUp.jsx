@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import "./SignUp.css";
 import { useState } from 'react';
 import LogoImg from '../../images/logo-icon-bt-blue.png'
@@ -57,6 +58,9 @@ const SignUp = () => {
   }
   return (
     <div className="vh-100 d-flex">
+    <Helmet>
+      <title>Flood Report</title>
+    </Helmet>
       <div className="container-body-signup m-auto">
         <div class="container-body-signup-config">
           <div className="body-signup-card">

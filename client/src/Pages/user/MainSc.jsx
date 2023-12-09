@@ -1,4 +1,5 @@
 import "./MainSc.css";
+import {Helmet} from "react-helmet";
 import Navbar from "../../components/user/Navbar";
 import Footer from "../../components/user/Footer";
 import axios from "axios";
@@ -102,6 +103,9 @@ export default function MainSc() {
   };
   return (
     <Container className="vh-100">
+    <Helmet>
+      <title>Flood Report</title>
+    </Helmet>
       <Row>
         {/* <Col>
           <Container className="bg-img w-100 h-100 m-5" />
