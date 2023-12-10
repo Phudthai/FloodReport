@@ -9,7 +9,7 @@
     "build": "npm i --global",
     "dev" : "nodemon server.js"
   },
-  "author": "admin",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
