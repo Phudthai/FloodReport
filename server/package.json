@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm i",
     "dev": "nodemon server.js",
-    "prestart": ""
+    "prestart": "chmod +x node_modules/.bin/ts-node"
   },
   "author": "",
   "license": "ISC",
